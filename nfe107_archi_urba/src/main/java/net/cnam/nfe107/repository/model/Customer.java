@@ -21,7 +21,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id_customer")
-    private long id;
+    private Long id;
 
     @Column(name = "firstname")
     private String firstname;
@@ -51,7 +51,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(long id, String firstname, String lastname, String email, String phoneNumber, Address address) {
+    public Customer(Long id, String firstname, String lastname, String email, String phoneNumber, Address address) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -69,13 +69,15 @@ public class Customer {
     }
 
     public Customer(ECustomer eCustomer) {
+        this.id = eCustomer.getId();
         this.firstname = eCustomer.getFirstname();
         this.lastname = eCustomer.getLastname();
         this.email = eCustomer.getEmail();
+        this.address = eCustomer.getAddress();
         this.phoneNumber = eCustomer.getPhoneNumber();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -115,11 +117,25 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Nullable
     public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(@Nullable Address address) {
         this.address = address;
+    }
+
+    @Nullable
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(@Nullable Set<Order> orders) {
+        this.orders = orders;
     }
 }

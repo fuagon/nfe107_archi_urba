@@ -34,8 +34,8 @@ public class CustomerController {
 
     @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity<CustomerDTOOut> create(@RequestBody CustomerDTOInWithId customerDTOIn){
-        EAddress a = addressService.getById(3);
+    public ResponseEntity<CustomerDTOOut> create(@RequestBody CustomerDTOIn customerDTOIn){
+        EAddress a = addressService.getById(Long.parseLong(customerDTOIn.getAddress()));
         ECustomerToCreate eCustomerToCreate = new ECustomerToCreate(customerDTOIn, new Address(a));
         ECustomer cCreated = customerService.create(eCustomerToCreate);
         return new ResponseEntity<CustomerDTOOut>(new CustomerDTOOut(cCreated), HttpStatus.CREATED);
@@ -57,26 +57,27 @@ public class CustomerController {
     @ResponseBody
     public ResponseEntity<CustomerDTOOut> getById(@PathVariable("id") long id){
 
-        CustomerDTOOut dtoOutCustomer = new CustomerDTOOut(getECsutomerById(id));
+        CustomerDTOOut dtoOutCustomer = new CustomerDTOOut(getECustomerById(id));
         return new ResponseEntity<CustomerDTOOut>(dtoOutCustomer, HttpStatus.OK);
     }
 
     @PutMapping("/update")
     @ResponseBody
-    public ResponseEntity<CustomerDTOOut> update(@RequestBody CustomerDTOOut CustomerDTOOut){
-        ECustomer toUpdate = new ECustomer(CustomerDTOOut);
+    public ResponseEntity<CustomerDTOOut> update(@RequestBody CustomerDTOInWithId CustomerDTOIn){
+        EAddress a = addressService.getById(Long.parseLong(CustomerDTOIn.getAddress()));
+        ECustomer toUpdate = new ECustomer(CustomerDTOIn, new Address(a));
         ECustomer eCustomerUpdate = customerService.update(toUpdate);
         return new ResponseEntity<CustomerDTOOut>(new CustomerDTOOut(eCustomerUpdate), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable("id") long id){
+    public ResponseEntity<?> deleteById(@PathVariable("id") Long id){
 
-        customerService.delete(getECsutomerById(id));
+        customerService.delete(getECustomerById(id));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    private ECustomer getECsutomerById(long id){
+    private ECustomer getECustomerById(Long id){
         ECustomer cFound = customerService.getById(id);
         return cFound;
     }

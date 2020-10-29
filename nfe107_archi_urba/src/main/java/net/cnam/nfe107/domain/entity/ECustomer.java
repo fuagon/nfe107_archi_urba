@@ -6,6 +6,7 @@ package net.cnam.nfe107.domain.entity;
  * @author Ohtnaoh - AD
  */
 
+import net.cnam.nfe107.controller.dto.CustomerDTOInWithId;
 import net.cnam.nfe107.controller.dto.CustomerDTOOut;
 import net.cnam.nfe107.repository.model.Address;
 import net.cnam.nfe107.repository.model.Customer;
@@ -43,6 +44,14 @@ public class ECustomer {
         this.email = customerDTOOut.getEmail();
         this.phoneNumber = customerDTOOut.getPhoneNumber();
         this.address = new Address(customerDTOOut.getAddress());
+    }
+    public ECustomer(CustomerDTOInWithId customerDTOOut, Address address) {
+        this.id = customerDTOOut.getId();
+        this.firstname = customerDTOOut.getFirstname();
+        this.lastname = customerDTOOut.getLastname();
+        this.email = customerDTOOut.getEmail();
+        this.phoneNumber = customerDTOOut.getPhoneNumber();
+        this.address = address;
     }
 
     public Long getId() {

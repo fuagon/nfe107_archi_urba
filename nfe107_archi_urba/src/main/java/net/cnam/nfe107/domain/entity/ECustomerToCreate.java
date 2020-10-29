@@ -35,6 +35,13 @@ public class ECustomerToCreate {
         this.address = address;
         this.phoneNumber=customerDTOIn.getPhoneNumber();
     }
+    public ECustomerToCreate(CustomerDTOIn customerDTOIn, Address address){
+        this.firstname = customerDTOIn.getFirstname();
+        this.lastname = customerDTOIn.getLastname();
+        this.email = customerDTOIn.getEmail();
+        this.address = address;
+        this.phoneNumber=customerDTOIn.getPhoneNumber();
+    }
 
     public String getFirstname() {
         return firstname;
