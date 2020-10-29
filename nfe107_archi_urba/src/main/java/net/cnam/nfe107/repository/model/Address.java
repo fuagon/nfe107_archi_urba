@@ -6,6 +6,10 @@ package net.cnam.nfe107.repository.model;
  * @author Ohtnaoh - AD
  */
 
+import net.cnam.nfe107.domain.entity.EAddress;
+import net.cnam.nfe107.domain.entity.EAddressToCreate;
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,9 +21,9 @@ import java.util.Set;
 public class Address {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_address")
-    private long id;
+    private Long id;
 
     @Column(name = "country")
     private String country;
@@ -39,12 +43,46 @@ public class Address {
     @Column(name = "customers")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
             targetEntity = Customer.class)
+    @Nullable
     private Set<Customer> customers = new HashSet<>();
 
     public Address() {
     }
 
-    public Address(long id, String country, String city, String postalCode, String addressNumber, String street, Set<Customer> customers) {
+    public Address(String country, String city, String postalCode, String addressNumber, String street) {
+        this.country = country;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.addressNumber = addressNumber;
+        this.street = street;
+    }
+    public Address(Long id, String country, String city, String postalCode, String addressNumber, String street) {
+        this.id = id;
+        this.country = country;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.addressNumber = addressNumber;
+        this.street = street;
+    }
+
+    public Address(EAddress eAddress) {
+        this.id = eAddress.getId();
+        this.country = eAddress.getCountry();
+        this.city = eAddress.getCity();
+        this.postalCode = eAddress.getPostalCode();
+        this.addressNumber = eAddress.getAddressNumber();
+        this.street = eAddress.getStreet();
+    }
+
+    public Address(EAddressToCreate eAddressToCreate) {
+        this.country = eAddressToCreate.getCountry();
+        this.city = eAddressToCreate.getCity();
+        this.postalCode = eAddressToCreate.getPostalCode();
+        this.addressNumber = eAddressToCreate.getAddressNumber();
+        this.street = eAddressToCreate.getStreet();
+    }
+
+    public Address(Long id, String country, String city, String postalCode, String addressNumber, String street, Set<Customer> customers) {
         this.id = id;
         this.country = country;
         this.city = city;
@@ -54,11 +92,11 @@ public class Address {
         this.customers = customers;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -102,11 +140,12 @@ public class Address {
         this.street = street;
     }
 
+    @Nullable
     public Set<Customer> getCustomers() {
         return customers;
     }
 
-    public void setCustomers(Set<Customer> customers) {
+    public void setCustomers(@Nullable Set<Customer> customers) {
         this.customers = customers;
     }
 }

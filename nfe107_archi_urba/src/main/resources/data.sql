@@ -1,8 +1,8 @@
 -- TABLE ADDRESS
-INSERT INTO TABLE_ADDRESS (id_address, address_number, city, country, postal_code, street) VALUES (1, '8', 'Schiltigheim', 'france', '627300', 'Rue de wissembourg')
-INSERT INTO TABLE_ADDRESS (id_address, address_number, city, country, postal_code, street) VALUES (2, '3A', 'Lipsheim', 'france', '67250', 'Rue de la croix')
-INSERT INTO TABLE_ADDRESS (id_address, address_number, city, country, postal_code, street) VALUES (3, '4', 'Kogenheim', 'france', '67230', 'Impasse du hohwald')
-INSERT INTO TABLE_ADDRESS (id_address, address_number, city, country, postal_code, street) VALUES (4, '48C', 'Obernai', 'france', '67210', 'Rue de selestat')
+INSERT INTO TABLE_ADDRESS (id_address, address_number, city, country, postal_code, street) VALUES (1, '8', 'Schiltigheim', 'France', '627300', 'Rue de wissembourg')
+INSERT INTO TABLE_ADDRESS (id_address, address_number, city, country, postal_code, street) VALUES (2, '3A', 'Lipsheim', 'France', '67250', 'Rue de la croix')
+INSERT INTO TABLE_ADDRESS (id_address, address_number, city, country, postal_code, street) VALUES (3, '4', 'Kogenheim', 'France', '67230', 'Impasse du hohwald')
+INSERT INTO TABLE_ADDRESS (id_address, address_number, city, country, postal_code, street) VALUES (4, '48C', 'Obernai', 'France', '67210', 'Rue de selestat')
 
 
 -- TABLE CUSTOMER

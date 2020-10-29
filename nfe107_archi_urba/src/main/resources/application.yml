@@ -8,7 +8,7 @@ spring:
     url: jdbc:h2:mem:sample-app;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
     platform: h2
     username: grp4
-    password: passwordgrp4*
+    password:
     driverClassName: org.h2.Driver
 
   jpa:
