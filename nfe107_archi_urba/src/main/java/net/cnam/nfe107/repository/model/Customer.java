@@ -6,6 +6,8 @@ package net.cnam.nfe107.repository.model;
  * @author Ohtnaoh - AD
  */
 
+import net.cnam.nfe107.domain.entity.ECustomer;
+import net.cnam.nfe107.domain.entity.ECustomerToCreate;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -17,7 +19,7 @@ import java.util.Set;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id_customer")
     private long id;
 
@@ -34,6 +36,7 @@ public class Customer {
     private String phoneNumber;
 
     @ManyToOne @JoinColumn(name="address", nullable=false )
+    @Nullable
     private Address address;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -55,6 +58,21 @@ public class Customer {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
+    }
+
+    public Customer(ECustomerToCreate eCustomerToCreate) {
+        this.firstname = eCustomerToCreate.getFirstname();
+        this.lastname = eCustomerToCreate.getLastname();
+        this.email = eCustomerToCreate.getEmail();
+        this.phoneNumber = eCustomerToCreate.getPhoneNumber();
+        this.address = eCustomerToCreate.getAddress();
+    }
+
+    public Customer(ECustomer eCustomer) {
+        this.firstname = eCustomer.getFirstname();
+        this.lastname = eCustomer.getLastname();
+        this.email = eCustomer.getEmail();
+        this.phoneNumber = eCustomer.getPhoneNumber();
     }
 
     public long getId() {

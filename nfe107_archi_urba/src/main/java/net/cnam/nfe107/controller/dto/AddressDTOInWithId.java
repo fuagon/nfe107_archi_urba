@@ -1,15 +1,12 @@
 package net.cnam.nfe107.controller.dto;
 
 /*
- * @created 29/10/2020/10/2020 - 15:32
+ * @created 29/10/2020/10/2020 - 19:27
  * @project nfe107_archi_urba
  * @author Ohtnaoh - AD
  */
 
-import net.cnam.nfe107.domain.entity.EAddress;
-import net.cnam.nfe107.repository.model.Address;
-
-public class AddressDTOOut {
+public class AddressDTOInWithId {
     private Long id;
     private String country;
     private String city;
@@ -17,31 +14,13 @@ public class AddressDTOOut {
     private String addressNumber;
     private String street;
 
-    public AddressDTOOut(Long id, String country, String city, String postalCode, String addressNumber, String street) {
+    public AddressDTOInWithId(Long id, String country, String city, String postalCode, String addressNumber, String street) {
         this.id = id;
         this.country = country;
         this.city = city;
         this.postalCode = postalCode;
         this.addressNumber = addressNumber;
         this.street = street;
-    }
-
-    public AddressDTOOut(EAddress eAddress){
-        this.id = eAddress.getId();
-        this.country = eAddress.getCountry();
-        this.city = eAddress.getCity();
-        this.postalCode = eAddress.getPostalCode();
-        this.addressNumber = eAddress.getAddressNumber();
-        this.street = eAddress.getStreet();
-    }
-
-    public AddressDTOOut(Address address){
-        this.id = address.getId();
-        this.country = address.getCountry();
-        this.city = address.getCity();
-        this.postalCode = address.getPostalCode();
-        this.addressNumber = address.getAddressNumber();
-        this.street = address.getStreet();
     }
 
     public Long getId() {

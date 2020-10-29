@@ -6,6 +6,7 @@ package net.cnam.nfe107.repository.model;
  * @author Ohtnaoh - AD
  */
 
+import net.cnam.nfe107.controller.dto.AddressDTOOut;
 import net.cnam.nfe107.domain.entity.EAddress;
 import net.cnam.nfe107.domain.entity.EAddressToCreate;
 import org.springframework.lang.Nullable;
@@ -47,6 +48,14 @@ public class Address {
     private Set<Customer> customers = new HashSet<>();
 
     public Address() {
+    }
+
+    public Address(AddressDTOOut dtoOut) {
+        this.country = dtoOut.getCountry();
+        this.city = dtoOut.getCity();
+        this.postalCode = dtoOut.getPostalCode();
+        this.addressNumber = dtoOut.getAddressNumber();
+        this.street = dtoOut.getStreet();
     }
 
     public Address(String country, String city, String postalCode, String addressNumber, String street) {

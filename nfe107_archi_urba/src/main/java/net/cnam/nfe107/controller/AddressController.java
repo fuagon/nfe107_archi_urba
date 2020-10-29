@@ -7,6 +7,7 @@ package net.cnam.nfe107.controller;
  */
 
 import net.cnam.nfe107.controller.dto.AddressDTOIn;
+import net.cnam.nfe107.controller.dto.AddressDTOInWithId;
 import net.cnam.nfe107.controller.dto.AddressDTOOut;
 import net.cnam.nfe107.domain.AddressService;
 import net.cnam.nfe107.domain.entity.EAddress;
@@ -57,7 +58,7 @@ public class AddressController {
 
     @PutMapping("/update")
     @ResponseBody
-    public ResponseEntity<AddressDTOOut> update(@RequestBody AddressDTOOut addressDTOOut){
+    public ResponseEntity<AddressDTOOut> update(@RequestBody AddressDTOInWithId addressDTOOut){
         EAddress toUpdate = new EAddress(addressDTOOut);
         EAddress eAddressUpdate = addressService.update(toUpdate);
         return new ResponseEntity<AddressDTOOut>(new AddressDTOOut(eAddressUpdate), HttpStatus.OK);

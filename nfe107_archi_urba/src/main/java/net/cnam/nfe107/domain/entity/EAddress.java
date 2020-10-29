@@ -7,6 +7,7 @@ package net.cnam.nfe107.domain.entity;
  */
 
 import net.cnam.nfe107.controller.dto.AddressDTOIn;
+import net.cnam.nfe107.controller.dto.AddressDTOInWithId;
 import net.cnam.nfe107.controller.dto.AddressDTOOut;
 import net.cnam.nfe107.repository.model.Address;
 
@@ -36,7 +37,14 @@ public class EAddress {
         this.street = address.getStreet();
     }
 
-    public EAddress(AddressDTOOut addressDTOIn){
+    public EAddress(AddressDTOIn addressDTOIn){
+        this.country = addressDTOIn.getCountry();
+        this.city = addressDTOIn.getCity();
+        this.postalCode = addressDTOIn.getPostalCode();
+        this.addressNumber = addressDTOIn.getAddressNumber();
+        this.street = addressDTOIn.getStreet();
+    }
+    public EAddress(AddressDTOInWithId addressDTOIn){
         this.id = addressDTOIn.getId();
         this.country = addressDTOIn.getCountry();
         this.city = addressDTOIn.getCity();
@@ -44,6 +52,7 @@ public class EAddress {
         this.addressNumber = addressDTOIn.getAddressNumber();
         this.street = addressDTOIn.getStreet();
     }
+
 
 
 
