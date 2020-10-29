@@ -19,7 +19,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id_order")
-    private long id;
+    private Long id;
 
     @Column(name = "date")
     private String date;
@@ -45,12 +45,10 @@ public class Order {
     @Nullable
     private Set<Customer> customers = new HashSet<>();
 
-
-
     public Order() {
     }
 
-    public Order(long id, String date, float totalPrice, @Nullable Set<Product> products, @Nullable Set<Customer> customers) {
+    public Order(Long id, String date, float totalPrice, @Nullable Set<Product> products, @Nullable Set<Customer> customers) {
         this.id = id;
         this.date = date;
         this.totalPrice = totalPrice;
@@ -58,11 +56,11 @@ public class Order {
         this.customers = customers;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -99,4 +97,6 @@ public class Order {
     public void setCustomers(@Nullable Set<Customer> customers) {
         this.customers = customers;
     }
+
+
 }

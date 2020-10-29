@@ -46,7 +46,7 @@ public class CustomerService {
         return eCustomers;
     }
 
-    public ECustomer getById(long id){
+    public ECustomer getById(Long id){
         Customer cFound = customerRepository.getOne(id);
         return new ECustomer(cFound);
     }

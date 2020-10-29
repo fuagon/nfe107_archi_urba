@@ -42,7 +42,7 @@ public class AddressService {
         return eAddresses;
     }
 
-    public EAddress getById(long id){
+    public EAddress getById(Long id){
         Address aFound = addressRepository.getOne(id);
         return new EAddress(aFound);
     }

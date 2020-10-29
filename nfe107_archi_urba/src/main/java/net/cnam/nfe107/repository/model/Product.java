@@ -19,7 +19,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id_product")
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -39,11 +39,10 @@ public class Product {
     @Nullable
     private Set<Order> orders = new HashSet<>();
 
-
     public Product() {
     }
 
-    public Product(long id, String name, String description, float price, @Nullable Set<Order> orders) {
+    public Product(Long id, String name, String description, float price, @Nullable Set<Order> orders) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -51,11 +50,11 @@ public class Product {
         this.orders = orders;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

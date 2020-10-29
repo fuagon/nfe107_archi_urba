@@ -55,7 +55,7 @@ public class CustomerController {
 
     @GetMapping("/getById/{id}")
     @ResponseBody
-    public ResponseEntity<CustomerDTOOut> getById(@PathVariable("id") long id){
+    public ResponseEntity<CustomerDTOOut> getById(@PathVariable("id") Long id){
 
         CustomerDTOOut dtoOutCustomer = new CustomerDTOOut(getECustomerById(id));
         return new ResponseEntity<CustomerDTOOut>(dtoOutCustomer, HttpStatus.OK);

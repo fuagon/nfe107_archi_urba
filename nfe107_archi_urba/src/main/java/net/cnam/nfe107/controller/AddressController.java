@@ -50,7 +50,7 @@ public class AddressController {
 
     @GetMapping("/getById/{id}")
     @ResponseBody
-    public ResponseEntity<AddressDTOOut> getById(@PathVariable("id") long id){
+    public ResponseEntity<AddressDTOOut> getById(@PathVariable("id") Long id){
 
         AddressDTOOut dtoOutAddress = new AddressDTOOut(getEAddressById(id));
         return new ResponseEntity<AddressDTOOut>(dtoOutAddress, HttpStatus.OK);
@@ -65,13 +65,13 @@ public class AddressController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable("id") long id){
+    public ResponseEntity<?> deleteById(@PathVariable("id") Long id){
 
         addressService.delete(getEAddressById(id));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    private EAddress getEAddressById(long id){
+    private EAddress getEAddressById(Long id){
         EAddress aFound = addressService.getById(id);
         return aFound;
     }
