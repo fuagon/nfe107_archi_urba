@@ -6,8 +6,8 @@ package net.cnam.nfe107.repository;
  * @author Ohtnaoh - AD
  */
 
-import net.cnam.nfe107.repository.model.Customer;
+import net.cnam.nfe107.repository.model.CustomerModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<CustomerModel, Long> {
 }

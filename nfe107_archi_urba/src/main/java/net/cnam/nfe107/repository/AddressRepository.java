@@ -6,10 +6,9 @@ package net.cnam.nfe107.repository;
  * @author Ohtnaoh - AD
  */
 
-import net.cnam.nfe107.repository.model.Address;
+import net.cnam.nfe107.repository.model.AddressModel;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
-public interface AddressRepository extends JpaRepository<Address, Long> {
+public interface AddressRepository extends JpaRepository<AddressModel, Long> {
 
 }

@@ -6,13 +6,7 @@ package net.cnam.nfe107.controller;
  * @author Ohtnaoh - AD
  */
 
-import net.cnam.nfe107.controller.dto.AddressDTOIn;
-import net.cnam.nfe107.controller.dto.AddressDTOInWithId;
-import net.cnam.nfe107.controller.dto.AddressDTOOut;
 import net.cnam.nfe107.domain.AddressService;
-import net.cnam.nfe107.domain.entity.EAddress;
-import net.cnam.nfe107.domain.entity.EAddressToCreate;
-import net.cnam.nfe107.repository.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +19,7 @@ import java.util.List;
 @RequestMapping("address")
 public class AddressController {
 
-    @Autowired
+    /*@Autowired
     AddressService addressService;
 
     @PostMapping("/create")
@@ -75,4 +69,6 @@ public class AddressController {
         EAddress aFound = addressService.getById(id);
         return aFound;
     }
+
+    */
 }

@@ -6,8 +6,8 @@ package net.cnam.nfe107.repository;
  * @author Ohtnaoh - AD
  */
 
-import net.cnam.nfe107.repository.model.Order;
+import net.cnam.nfe107.repository.model.OrderModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<OrderModel, Long> {
 }

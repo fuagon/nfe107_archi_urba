@@ -6,25 +6,31 @@ package net.cnam.nfe107.domain;
  * @author Ohtnaoh - AD
  */
 
-import net.cnam.nfe107.domain.entity.EAddress;
-import net.cnam.nfe107.domain.entity.EAddressToCreate;
-import net.cnam.nfe107.domain.entity.ECustomer;
-import net.cnam.nfe107.domain.entity.ECustomerToCreate;
-import net.cnam.nfe107.repository.AddressRepository;
 import net.cnam.nfe107.repository.CustomerRepository;
-import net.cnam.nfe107.repository.model.Address;
-import net.cnam.nfe107.repository.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @Transactional
 public class CustomerService {
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    // Create
+
+    // READ
+
+    // UPDATE
+
+    // DELETE
+
+
+
+
+/*
     @Autowired
     private CustomerRepository customerRepository;
 
@@ -62,5 +68,5 @@ public class CustomerService {
     // DELETE
     public void delete (ECustomer eCustomer){
         customerRepository.delete(new Customer(eCustomer));
-    }
+    }*/
 }

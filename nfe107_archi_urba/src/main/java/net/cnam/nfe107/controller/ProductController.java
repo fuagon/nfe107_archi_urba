@@ -12,5 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("product")
 public class ProductController {
-    // TODO
+
+    // TODO GET ALL
+    // TODO GETBYID
+    // TODO CREATE
+    // TODO DELETE
+    // TODO UPDATE
 }
