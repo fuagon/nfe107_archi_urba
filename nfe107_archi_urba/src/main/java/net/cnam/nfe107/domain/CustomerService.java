@@ -6,7 +6,10 @@ package net.cnam.nfe107.domain;
  * @author Ohtnaoh - AD
  */
 
+import net.cnam.nfe107.domain.entity.ECustomer;
+import net.cnam.nfe107.domain.entity.ECustomerToCreate;
 import net.cnam.nfe107.repository.CustomerRepository;
+import net.cnam.nfe107.repository.model.CustomerModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +22,7 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    // Create
+    // CREATE
 
     // READ
 

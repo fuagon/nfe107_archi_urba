@@ -22,7 +22,7 @@ public class AddressModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_address")
-    private Long id;
+    private Long idAddress;
 
     @Column(name = "country")
     private String country;
@@ -48,5 +48,81 @@ public class AddressModel {
     private Set<OrderModel> orders = new HashSet<>();
 
     public AddressModel() {
+    }
+
+    public AddressModel(Long idAddress, String country, String city, String postalCode, String addressNumber, String street, CustomerModel customer, @Nullable Set<OrderModel> orders) {
+        this.idAddress = idAddress;
+        this.country = country;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.addressNumber = addressNumber;
+        this.street = street;
+        this.customer = customer;
+        this.orders = orders;
+    }
+
+    public Long getIdAddress() {
+        return idAddress;
+    }
+
+    public void setIdAddress(Long idAddress) {
+        this.idAddress = idAddress;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getAddressNumber() {
+        return addressNumber;
+    }
+
+    public void setAddressNumber(String addressNumber) {
+        this.addressNumber = addressNumber;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public CustomerModel getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomerModel customer) {
+        this.customer = customer;
+    }
+
+    @Nullable
+    public Set<OrderModel> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(@Nullable Set<OrderModel> orders) {
+        this.orders = orders;
     }
 }

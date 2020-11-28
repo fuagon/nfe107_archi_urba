@@ -21,7 +21,7 @@ public class ProductModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_product")
-    private Long id;
+    private Long idProduct;
 
     @Column(name = "name")
     private String name;
@@ -39,7 +39,64 @@ public class ProductModel {
     @Nullable
     private Set<OrderProductModel> ordersProducts = new HashSet<>();
 
-
     public ProductModel() {
+    }
+
+    public ProductModel(Long idProduct, String name, String description, float price, int stock, @Nullable Set<OrderProductModel> ordersProducts) {
+        this.idProduct = idProduct;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.ordersProducts = ordersProducts;
+    }
+
+    public Long getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(Long idProduct) {
+        this.idProduct = idProduct;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    @Nullable
+    public Set<OrderProductModel> getOrdersProducts() {
+        return ordersProducts;
+    }
+
+    public void setOrdersProducts(@Nullable Set<OrderProductModel> ordersProducts) {
+        this.ordersProducts = ordersProducts;
     }
 }

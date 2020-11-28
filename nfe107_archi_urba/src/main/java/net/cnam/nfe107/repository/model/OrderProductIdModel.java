@@ -26,6 +26,7 @@ public class OrderProductIdModel implements Serializable {
     public OrderProductIdModel() {
     }
 
+
     public Long getIdOrder() {
         return idOrder;
     }
