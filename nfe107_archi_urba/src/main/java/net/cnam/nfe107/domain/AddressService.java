@@ -1,56 +1,64 @@
 package net.cnam.nfe107.domain;
 
-/*
- * @created 29/10/2020/10/2020 - 10:57
- * @project nfe107_archi_urba
- * @author Ohtnaoh - AD
- */
-
+import net.cnam.nfe107.controller.dto.AddressResponse;
+import net.cnam.nfe107.domain.entity.Address;
+import net.cnam.nfe107.domain.entity.AddressToCreate;
+import net.cnam.nfe107.domain.entity.Customer;
+import net.cnam.nfe107.repository.AddressRepository;
+import net.cnam.nfe107.repository.model.AddressModel;
+import net.cnam.nfe107.repository.model.CustomerModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.*;
 
 @Service
 @Transactional
 public class AddressService {
-/*
+
     @Autowired
     private AddressRepository addressRepository;
 
-    // CREATE
-    public EAddress create(EAddressToCreate eAddressToCreate){
+    public List<Address> getAllAddresses() {
+        List<Address> addresses = new ArrayList<>();
+        List<AddressModel> addressesFromModel = addressRepository.findAll();
 
-        AddressModel aToCreate = new AddressModel(eAddressToCreate);
-        AddressModel aCreated = addressRepository.save(aToCreate);
-        return new EAddress(aCreated);
-    }
-
-    // READ
-    public List<EAddress> getAll(){
-        List<AddressModel> addressesFound = addressRepository.findAll();
-        List<EAddress> eAddresses = new ArrayList<EAddress>();
-        for (AddressModel a:addressesFound) {
-            eAddresses.add(new EAddress(a));
+        for (AddressModel addressModel:addressesFromModel) {
+            addresses.add(new Address(addressModel));
         }
-        return eAddresses;
+
+        return addresses;
     }
 
-    public EAddress getById(Long id){
-        AddressModel aFound = addressRepository.getOne(id);
-        return new EAddress(aFound);
+    public Address getById(Long idAddress) {
+        AddressModel addressModelFound = addressRepository.getOne(idAddress);
+
+        return new Address(addressModelFound);
     }
 
-    // UPDATE
-    public EAddress update(EAddress eAddress){
-        AddressModel a = new AddressModel(eAddress);
-        AddressModel aUpdate = addressRepository.save(a);
-        return new EAddress(aUpdate);
+    public Address create(AddressToCreate addressToCreate, Customer customer)
+    {
+        CustomerModel customerModel = new CustomerModel(customer);
+        AddressModel addressModelToCreate = new AddressModel(addressToCreate, customerModel);
+
+        AddressModel addressModelCreated = addressRepository.save(addressModelToCreate);
+
+        return new Address(addressModelCreated);
     }
 
+    public Address update(Address addressToUpdate)
+    {
+        CustomerModel customerModel = new CustomerModel(addressToUpdate.getCustomer());
+        AddressModel addressModel = new AddressModel(addressToUpdate, customerModel);
 
-    // DELETE
-    public void delete (EAddress eAddress){
-        addressRepository.delete(new AddressModel(eAddress));
+        AddressModel addressModelUpdated = addressRepository.save(addressModel);
+
+        return new Address(addressModelUpdated);
     }
-*/
+
+    public void delete(Long id)
+    {
+        addressRepository.deleteById(id);
+    }
 }

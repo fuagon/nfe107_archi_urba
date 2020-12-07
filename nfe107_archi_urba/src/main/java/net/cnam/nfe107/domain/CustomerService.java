@@ -1,19 +1,17 @@
 package net.cnam.nfe107.domain;
 
-/*
- * @created 29/10/2020/10/2020 - 10:56
- * @project nfe107_archi_urba
- * @author Ohtnaoh - AD
- */
-
-import net.cnam.nfe107.domain.entity.ECustomer;
-import net.cnam.nfe107.domain.entity.ECustomerToCreate;
+import net.cnam.nfe107.domain.entity.Customer;
+import net.cnam.nfe107.domain.entity.Customer;
+import net.cnam.nfe107.domain.entity.CustomerToCreate;
 import net.cnam.nfe107.repository.CustomerRepository;
+import net.cnam.nfe107.repository.model.CustomerModel;
+import net.cnam.nfe107.repository.model.CustomerModel;
 import net.cnam.nfe107.repository.model.CustomerModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -22,54 +20,40 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    // CREATE
+    public List<CustomerModel> getAllCustomers() {
+        List<CustomerModel> customers;
 
-    // READ
+        customers = customerRepository.findAll();
 
-    // UPDATE
-
-    // DELETE
-
-
-
-
-/*
-    @Autowired
-    private CustomerRepository customerRepository;
-
-    // CREATE
-    public ECustomer create(ECustomerToCreate eCustomerToCreate){
-
-        Customer cToCreate = new Customer(eCustomerToCreate);
-        Customer cCreated = customerRepository.save(cToCreate);
-        return new ECustomer(cCreated);
+        return customers;
     }
 
-    // READ
-    public List<ECustomer> getAll(){
-        List<Customer> customersFound = customerRepository.findAll();
-        List<ECustomer> eCustomers = new ArrayList<ECustomer>();
-        for (Customer c:customersFound) {
-            eCustomers.add(new ECustomer(c));
-        }
-        return eCustomers;
+    public Customer getById(Long idCustomer) {
+        CustomerModel customerModelFound = customerRepository.getOne(idCustomer);
+
+        return new Customer(customerModelFound);
     }
 
-    public ECustomer getById(Long id){
-        Customer cFound = customerRepository.getOne(id);
-        return new ECustomer(cFound);
+    public Customer create(CustomerToCreate customerToCreate)
+    {
+        CustomerModel customerModelToCreate = new CustomerModel(customerToCreate);
+
+        CustomerModel customerModelCreated = customerRepository.save(customerModelToCreate);
+
+        return new Customer(customerModelCreated);
     }
 
-    // UPDATE
-    public ECustomer update(ECustomer eCustomer){
-        Customer c = new Customer(eCustomer);
-        Customer cUpdate = customerRepository.save(c);
-        return new ECustomer(cUpdate);
+    public Customer update(Customer customerToUpdate)
+    {
+        CustomerModel customerModel = new CustomerModel(customerToUpdate);
+
+        CustomerModel customerModelUpdated = customerRepository.save(customerModel);
+
+        return new Customer(customerModelUpdated);
     }
 
-
-    // DELETE
-    public void delete (ECustomer eCustomer){
-        customerRepository.delete(new Customer(eCustomer));
-    }*/
+    public void delete(Long id)
+    {
+        customerRepository.deleteById(id);
+    }
 }

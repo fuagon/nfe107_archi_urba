@@ -1,71 +1,82 @@
 package net.cnam.nfe107.controller;
 
-/*
- * @created 29/10/2020/10/2020 - 11:23
- * @project nfe107_archi_urba
- * @author Ohtnaoh - AD
- */
-
+import net.cnam.nfe107.controller.dto.*;
+import net.cnam.nfe107.controller.dto.CustomerResponse;
+import net.cnam.nfe107.domain.CustomerService;
+import net.cnam.nfe107.domain.entity.Customer;
+import net.cnam.nfe107.domain.entity.CustomerToCreate;
+import net.cnam.nfe107.repository.model.CustomerModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
-@RequestMapping("customer")
+@RequestMapping("/customer")
 public class CustomerController {
 
-
-    /*
     @Autowired
     CustomerService customerService;
 
+    @GetMapping("/getAllCustomers")
+    @ResponseBody
+    public ResponseEntity<ArrayList<CustomerResponse>> getAllCustomers() {
+
+        List<CustomerModel> customerFound = customerService.getAllCustomers();
+        ArrayList<CustomerResponse> customersResponse = new ArrayList<>();
+
+        for (CustomerModel customer:customerFound) {
+            CustomerResponse customer1 = new CustomerResponse(customer);
+            customersResponse.add(customer1);
+        }
+
+        return new ResponseEntity<>(customersResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<CustomerResponse> getCustomer(@PathVariable("id") Long id) {
+        Customer customerFound = customerService.getById(id);
+
+        CustomerResponse customerResponse = new CustomerResponse(customerFound);
+
+        return new ResponseEntity<>(customerResponse, HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity<CustomerDTOOut> create(@RequestBody CustomerDTOIn customerDTOIn){
-        ECustomerToCreate eCustomerToCreate = new ECustomerToCreate(customerDTOIn);
-        ECustomer cCreated = customerService.create(eCustomerToCreate);
-        return new ResponseEntity<CustomerDTOOut>(new CustomerDTOOut(cCreated), HttpStatus.CREATED);
-    }
+    public ResponseEntity<CustomerResponse> createCustomer(@RequestBody CustomerRequest customerRequest) {
+        CustomerToCreate customerToCreate = new CustomerToCreate(customerRequest);
 
+        Customer customerCreated = customerService.create(customerToCreate);
 
-    @GetMapping("/getAll")
-    @ResponseBody
-    public List<CustomerDTOOut> getAll(){
-        List<ECustomer> cFound = customerService.getAll();
-        List<CustomerDTOOut> dtoOutCustomers = new ArrayList<>();
-        for (ECustomer eC: cFound) {
-            dtoOutCustomers.add(new CustomerDTOOut(eC));
-        }
-        return dtoOutCustomers;
-    }
+        CustomerResponse customerResponse = new CustomerResponse(customerCreated);
 
-    @GetMapping("/getById/{id}")
-    @ResponseBody
-    public ResponseEntity<CustomerDTOOut> getById(@PathVariable("id") Long id){
-
-        CustomerDTOOut dtoOutCustomer = new CustomerDTOOut(getECustomerById(id));
-        return new ResponseEntity<CustomerDTOOut>(dtoOutCustomer, HttpStatus.OK);
+        return new ResponseEntity<>(customerResponse, HttpStatus.OK);
     }
 
     @PutMapping("/update")
     @ResponseBody
-    public ResponseEntity<CustomerDTOOut> update(@RequestBody CustomerDTOInWithId customerDTOIn){
-        ECustomer toUpdate = new ECustomer(customerDTOIn);
-        ECustomer eCustomerUpdate = customerService.update(toUpdate);
-        return new ResponseEntity<CustomerDTOOut>(new CustomerDTOOut(eCustomerUpdate), HttpStatus.OK);
+    public ResponseEntity<CustomerResponse> updateCustomer(@RequestBody CustomerRequest customerRequest)
+    {
+        Customer customerToUpdate = new Customer(customerRequest);
+
+        Customer customerUpdated = customerService.update(customerToUpdate);
+
+        CustomerResponse customerResponse = new CustomerResponse(customerUpdated);
+
+        return new ResponseEntity<>(customerResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable("id") Long id){
+    @ResponseBody
+    public ResponseEntity<CustomerResponse> deleteCustomer(@PathVariable("id") Long id)
+    {
+        customerService.delete(id);
 
-        customerService.delete(getECustomerById(id));
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    private ECustomer getECustomerById(Long id){
-        ECustomer cFound = customerService.getById(id);
-        return cFound;
-    }
-    */
-
-
 }

@@ -26,19 +26,15 @@ public class OrderProductIdModel implements Serializable {
     public OrderProductIdModel() {
     }
 
-
     public Long getIdOrder() {
         return idOrder;
     }
-
     public void setIdOrder(Long idOrder) {
         this.idOrder = idOrder;
     }
-
     public Long getIdProduct() {
         return idProduct;
     }
-
     public void setIdProduct(Long idProduct) {
         this.idProduct = idProduct;
     }

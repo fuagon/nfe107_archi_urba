@@ -1,74 +1,88 @@
 package net.cnam.nfe107.controller;
 
-/*
- * @created 29/10/2020/10/2020 - 11:24
- * @project nfe107_archi_urba
- * @author Ohtnaoh - AD
- */
-
+import net.cnam.nfe107.controller.dto.AddressRequest;
+import net.cnam.nfe107.controller.dto.AddressResponse;
 import net.cnam.nfe107.domain.AddressService;
+import net.cnam.nfe107.domain.CustomerService;
+import net.cnam.nfe107.domain.entity.Address;
+import net.cnam.nfe107.domain.entity.AddressToCreate;
+import net.cnam.nfe107.domain.entity.Customer;
+import net.cnam.nfe107.repository.model.AddressModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController
-@RequestMapping("address")
+@RequestMapping("/address")
 public class AddressController {
 
-    /*@Autowired
+    @Autowired
     AddressService addressService;
+
+    @Autowired
+    CustomerService customerService;
+
+    @GetMapping("/getAllAddresses")
+    @ResponseBody
+    public ResponseEntity<ArrayList<AddressResponse>> getAllAddresses() {
+        List<Address> addressFound = addressService.getAllAddresses();
+        ArrayList<AddressResponse> addressesResponse = new ArrayList<>();
+
+        for (Address address:addressFound) {
+            Customer customer = customerService.getById(address.getCustomer().getIdCustomer());
+            AddressResponse address1 = new AddressResponse(address, customer);
+            addressesResponse.add(address1);
+        }
+
+        return new ResponseEntity<>(addressesResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<AddressResponse> getAddress(@PathVariable("id") Long id) {
+        Address addressFound = addressService.getById(id);
+
+        AddressResponse addressResponse = new AddressResponse(addressFound, addressFound.getCustomer());
+
+        return new ResponseEntity<>(addressResponse, HttpStatus.OK);
+    }
 
     @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity<AddressDTOOut> create(@RequestBody AddressDTOIn addressDTOIn){
-        EAddressToCreate eAddressToCreate = new EAddressToCreate( addressDTOIn);
-        EAddress aCreated = addressService.create(eAddressToCreate);
-        return new ResponseEntity<AddressDTOOut>(new AddressDTOOut(aCreated), HttpStatus.CREATED);
-    }
+    public ResponseEntity<AddressResponse> createAddress(@RequestBody AddressRequest addressRequest) {
+        AddressToCreate addressToCreate = new AddressToCreate(addressRequest);
 
+        Customer customer = customerService.getById(addressRequest.getIdCustomer());
+        Address addressCreated = addressService.create(addressToCreate, customer);
 
-    @GetMapping("/getAll")
-    @ResponseBody
-    public List<AddressDTOOut> getAll(){
-        List<EAddress> aFound = addressService.getAll();
-        List<AddressDTOOut> dtoOutAddress = new ArrayList<>();
-        for (EAddress eA: aFound) {
-            dtoOutAddress.add(new AddressDTOOut(eA));
-        }
-        return dtoOutAddress;
-    }
+        AddressResponse addressResponse = new AddressResponse(addressCreated, customer);
 
-    @GetMapping("/getById/{id}")
-    @ResponseBody
-    public ResponseEntity<AddressDTOOut> getById(@PathVariable("id") Long id){
-
-        AddressDTOOut dtoOutAddress = new AddressDTOOut(getEAddressById(id));
-        return new ResponseEntity<AddressDTOOut>(dtoOutAddress, HttpStatus.OK);
+        return new ResponseEntity<>(addressResponse, HttpStatus.OK);
     }
 
     @PutMapping("/update")
     @ResponseBody
-    public ResponseEntity<AddressDTOOut> update(@RequestBody AddressDTOInWithId addressDTOOut){
-        EAddress toUpdate = new EAddress(addressDTOOut);
-        EAddress eAddressUpdate = addressService.update(toUpdate);
-        return new ResponseEntity<AddressDTOOut>(new AddressDTOOut(eAddressUpdate), HttpStatus.OK);
+    public ResponseEntity<AddressResponse> updateAddress(@RequestBody AddressRequest addressRequest)
+    {
+        Customer customerFound = customerService.getById(addressRequest.getIdCustomer());
+        Address addressToUpdate = new Address(addressRequest, customerFound);
+
+        Address addressUpdated = addressService.update(addressToUpdate);
+
+        AddressResponse addressResponse = new AddressResponse(addressUpdated);
+
+        return new ResponseEntity<>(addressResponse, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable("id") Long id){
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<AddressResponse> deleteAddress(@PathVariable("id") Long id)
+    {
+        addressService.delete(id);
 
-        addressService.delete(getEAddressById(id));
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    private EAddress getEAddressById(Long id){
-        EAddress aFound = addressService.getById(id);
-        return aFound;
-    }
-
-    */
 }

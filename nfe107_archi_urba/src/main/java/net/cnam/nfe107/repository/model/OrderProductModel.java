@@ -7,6 +7,9 @@ package net.cnam.nfe107.repository.model;
  */
 
 
+import net.cnam.nfe107.domain.entity.OrderProduct;
+import net.cnam.nfe107.domain.entity.OrderProductToCreate;
+
 import javax.persistence.*;
 
 @Entity
@@ -27,47 +30,47 @@ public class OrderProductModel{
     private ProductModel product;
 
     @Column(name = "quantity")
-    private int quantity;
+    private Long quantity;
 
     public OrderProductModel() {
     }
 
-    public OrderProductModel(OrderModel order, ProductModel product, int quantity) {
-        this.id = new OrderProductIdModel(order.getIdOrder(), product.getId());
+    public OrderProductModel(OrderModel order, ProductModel product, Long quantity) {
+        this.id = new OrderProductIdModel(order.getIdOrder(), product.getIdProduct());
         this.order = order;
         this.product = product;
         this.quantity = quantity;
     }
 
+    public OrderProductModel(OrderProduct orderProduct) {
+        this.id = new OrderProductIdModel(orderProduct.getOrder().getIdOrder(), orderProduct.getProduct().getIdProduct());
+        this.order = new OrderModel(orderProduct.getOrder());
+        this.product = new ProductModel(orderProduct.getProduct());
+        this.quantity = orderProduct.getQuantity();
+    }
+
     public OrderProductIdModel getId() {
         return id;
     }
-
     public void setId(OrderProductIdModel id) {
         this.id = id;
     }
-
     public OrderModel getOrder() {
         return order;
     }
-
     public void setOrder(OrderModel order) {
         this.order = order;
     }
-
     public ProductModel getProduct() {
         return product;
     }
-
     public void setProduct(ProductModel product) {
         this.product = product;
     }
-
-    public int getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
-
-    public void setQuantity(int quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 }

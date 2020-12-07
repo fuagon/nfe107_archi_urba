@@ -6,6 +6,9 @@ package net.cnam.nfe107.repository.model;
  * @author Ohtnaoh - AD
  */
 
+import net.cnam.nfe107.domain.entity.OrderStatus;
+import net.cnam.nfe107.domain.entity.OrderStatusToCreate;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,6 +33,17 @@ public class OrderStatusModel {
     public OrderStatusModel() {
     }
 
+    public OrderStatusModel(OrderStatusToCreate orderStatusToCreate)
+    {
+        this.description = orderStatusToCreate.getDescription();
+    }
+
+    public OrderStatusModel(OrderStatus orderStatus)
+    {
+        this.idOrderStatus = orderStatus.getIdOrderStatus();
+        this.description = orderStatus.getDescription();
+    }
+
     public OrderStatusModel(Long idOrderStatus, String description, Set<OrderModel> orders) {
         this.idOrderStatus = idOrderStatus;
         this.description = description;
@@ -39,23 +53,18 @@ public class OrderStatusModel {
     public Long getIdOrderStatus() {
         return idOrderStatus;
     }
-
     public void setIdOrderStatus(Long idOrderStatus) {
         this.idOrderStatus = idOrderStatus;
     }
-
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
     public Set<OrderModel> getOrders() {
         return orders;
     }
-
     public void setOrders(Set<OrderModel> orders) {
         this.orders = orders;
     }

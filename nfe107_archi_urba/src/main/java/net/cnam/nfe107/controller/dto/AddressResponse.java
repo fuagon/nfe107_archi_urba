@@ -1,87 +1,64 @@
-package net.cnam.nfe107.repository.model;
+package net.cnam.nfe107.controller.dto;
 
 import net.cnam.nfe107.domain.entity.Address;
-import net.cnam.nfe107.domain.entity.AddressToCreate;
 import net.cnam.nfe107.domain.entity.Customer;
+import net.cnam.nfe107.repository.model.AddressModel;
 
-import javax.persistence.*;
+public class AddressResponse {
 
-@Entity
-@Table(name="table_address")
-public class AddressModel {
+    //Attributes
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_address")
     private Long idAddress;
-
-    @Column(name = "country")
     private String country;
-
-    @Column(name = "city")
     private String city;
-
-    @Column(name = "postal_code")
     private String postalCode;
-
-    @Column(name = "address_number")
     private String addressNumber;
-
-    @Column(name = "street")
     private String street;
+    private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "id_customer")
-    private CustomerModel customer;
+    //Constructors
 
-    public AddressModel() {
-    }
-
-    public AddressModel(Long idAddress, String country, String city, String postalCode, String addressNumber, String street, CustomerModel customer) {
+    public AddressResponse(Long idAddress, String country, String city, String postalCode, String addressNumber, String street) {
         this.idAddress = idAddress;
         this.country = country;
         this.city = city;
         this.postalCode = postalCode;
         this.addressNumber = addressNumber;
         this.street = street;
+    }
+
+    public AddressResponse(Address address) {
+        this.idAddress = address.getIdAddress();
+        this.country = address.getCountry();
+        this.city = address.getCity();
+        this.postalCode = address.getPostalCode();
+        this.addressNumber = address.getAddressNumber();
+        this.street = address.getStreet();
+        this.customer = address.getCustomer();
+    }
+
+    public AddressResponse(AddressModel addressModel) {
+        this.idAddress = addressModel.getIdAddress();
+        this.country = addressModel.getCountry();
+        this.city = addressModel.getCity();
+        this.postalCode = addressModel.getPostalCode();
+        this.addressNumber = addressModel.getAddressNumber();
+        this.street = addressModel.getStreet();
+    }
+
+    public AddressResponse(Address address, Customer customer) {
+        this.idAddress = address.getIdAddress();
+        this.country = address.getCountry();
+        this.city = address.getCity();
+        this.postalCode = address.getPostalCode();
+        this.addressNumber = address.getAddressNumber();
+        this.street = address.getStreet();
         this.customer = customer;
     }
 
-    public AddressModel(Address address)
-    {
-        this.idAddress = address.getIdAddress();
-        this.country = address.getCountry();
-        this.city = address.getCity();
-        this.postalCode = address.getPostalCode();
-        this.addressNumber = address.getAddressNumber();
-        this.street = address.getStreet();
-        this.customer = new CustomerModel(address.getCustomer());
-    }
+    //Getters and Setters
 
-    public AddressModel(Address address, CustomerModel customerModel)
-    {
-        this.idAddress = address.getIdAddress();
-        this.country = address.getCountry();
-        this.city = address.getCity();
-        this.postalCode = address.getPostalCode();
-        this.addressNumber = address.getAddressNumber();
-        this.street = address.getStreet();
-        this.customer = customerModel;
-    }
-
-    public AddressModel(AddressToCreate addressToCreate, CustomerModel customerModel)
-    {
-        this.country = addressToCreate.getCountry();
-        this.city = addressToCreate.getCity();
-        this.postalCode = addressToCreate.getPostalCode();
-        this.addressNumber = addressToCreate.getAddressNumber();
-        this.street = addressToCreate.getStreet();
-        this.customer = customerModel;
-    }
-
-    public Long getIdAddress() {
-        return idAddress;
-    }
+    public Long getIdAddress() { return idAddress; }
     public void setIdAddress(Long idAddress) {
         this.idAddress = idAddress;
     }
@@ -115,10 +92,8 @@ public class AddressModel {
     public void setStreet(String street) {
         this.street = street;
     }
-    public CustomerModel getCustomer() {
-        return customer;
-    }
-    public void setCustomer(CustomerModel customer) {
+    public Long getIdCustomer () { return customer.getIdCustomer(); }
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 }
