@@ -21,11 +21,11 @@ INSERT INTO TABLE_PRODUCT (id_product, name, description, price, stock) VALUES (
 -- TABLE ORDER STATUS
 INSERT INTO TABLE_ORDER_STATUS (id_order_status, description) VALUES (0, 'En cours de création')
 INSERT INTO TABLE_ORDER_STATUS (id_order_status, description) VALUES (1, 'En attente de paiement')
-INSERT INTO TABLE_ORDER_STATUS (id_order_status, description) VALUES (2, 'Payé')
+INSERT INTO TABLE_ORDER_STATUS (id_order_status, description) VALUES (2, 'Payée')
 INSERT INTO TABLE_ORDER_STATUS (id_order_status, description) VALUES (3, 'En cours de préparation')
-INSERT INTO TABLE_ORDER_STATUS (id_order_status, description) VALUES (4, 'Prêt à livrer')
+INSERT INTO TABLE_ORDER_STATUS (id_order_status, description) VALUES (4, 'Prête pour la livraison')
 INSERT INTO TABLE_ORDER_STATUS (id_order_status, description) VALUES (5, 'En transit')
-INSERT INTO TABLE_ORDER_STATUS (id_order_status, description) VALUES (6, 'Livré')
+INSERT INTO TABLE_ORDER_STATUS (id_order_status, description) VALUES (6, 'Livrée')
 
 -- TABLE ORDER
 INSERT INTO TABLE_ORDER (id_order, date, price, id_customer, id_address, id_order_status) VALUES (1, '29/10/2020', 8.4, 2, 2, 0)
