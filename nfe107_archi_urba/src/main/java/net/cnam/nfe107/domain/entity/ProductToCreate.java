@@ -7,27 +7,27 @@ public class ProductToCreate {
 
     private String name;
     private String description;
-    private Float price;
+    private Float priceProduct;
     private Long stock;
 
-    public ProductToCreate(String name, String description, Float price, Long stock) {
+    public ProductToCreate(String name, String description, Float priceProduct, Long stock) {
         this.name = name;
         this.description = description;
-        this.price = price;
+        this.priceProduct = priceProduct;
         this.stock = stock;
     }
 
     public ProductToCreate(ProductModel productModel) {
         this.name = productModel.getName();
         this.description = productModel.getDescription();
-        this.price = productModel.getPrice();
+        this.priceProduct = productModel.getPriceProduct();
         this.stock = productModel.getStock();
     }
 
     public ProductToCreate(ProductRequest productRequest) {
         this.name = productRequest.getName();
         this.description = productRequest.getDescription();
-        this.price = productRequest.getPrice();
+        this.priceProduct = productRequest.getPriceProduct();
         this.stock = productRequest.getStock();
     }
 
@@ -43,11 +43,11 @@ public class ProductToCreate {
     public void setDescription(String description) {
         this.description = description;
     }
-    public Float getPrice() {
-        return price;
+    public Float getPriceProduct() {
+        return priceProduct;
     }
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setPriceProduct(Float priceProduct) {
+        this.priceProduct = priceProduct;
     }
     public Long getStock() {
         return stock;

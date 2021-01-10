@@ -23,8 +23,8 @@ public class OrderModel {
     @Column(name = "date")
     private String date;
 
-    @Column(name = "price")
-    private Float price;
+    @Column(name = "price_order")
+    private Float priceOrder;
 
     @ManyToOne
     @JoinColumn(name = "id_customer")
@@ -46,10 +46,10 @@ public class OrderModel {
     public OrderModel() {
     }
 
-    public OrderModel(Long idOrder, String date, Float price, OrderStatusModel orderStatus, CustomerModel customer, AddressModel address, @Nullable Set<OrderProductModel> ordersProducts) {
+    public OrderModel(Long idOrder, String date, Float priceOrder, OrderStatusModel orderStatus, CustomerModel customer, AddressModel address, @Nullable Set<OrderProductModel> ordersProducts) {
         this.idOrder = idOrder;
         this.date = date;
-        this.price = price;
+        this.priceOrder = priceOrder;
         this.customer = customer;
         this.orderStatus = orderStatus;
         this.address = address;
@@ -60,7 +60,7 @@ public class OrderModel {
     {
         this.idOrder = order.getIdOrder();
         this.date = order.getDate();
-        this.price = order.getPrice();
+        this.priceOrder = order.getPriceOrder();
         this.customer = new CustomerModel(order.getCustomer());
         this.address = new AddressModel(order.getAddress());
         this.orderStatus = new OrderStatusModel(order.getOrderStatus());
@@ -69,13 +69,13 @@ public class OrderModel {
     public OrderModel(OrderToCreate orderToCreate)
     {
         this.date = orderToCreate.getDate();
-        this.price = orderToCreate.getPrice();
+        this.priceOrder = orderToCreate.getPriceOrder();
     }
 
     public OrderModel(OrderToCreate orderToCreate, CustomerModel customerModel)
     {
         this.date = orderToCreate.getDate();
-        this.price = orderToCreate.getPrice();
+        this.priceOrder = orderToCreate.getPriceOrder();
         this.customer = customerModel;
     }
 
@@ -83,14 +83,14 @@ public class OrderModel {
     {
         this.idOrder = order.getIdOrder();
         this.date = order.getDate();
-        this.price = order.getPrice();
+        this.priceOrder = order.getPriceOrder();
         this.customer = customerModel;
     }
 
     public OrderModel(OrderToCreate orderToCreate, CustomerModel customerModel, AddressModel addressModel, OrderStatusModel orderStatusModel)
     {
         this.date = orderToCreate.getDate();
-        this.price = orderToCreate.getPrice();
+        this.priceOrder = orderToCreate.getPriceOrder();
         this.customer = customerModel;
         this.address = addressModel;
         this.orderStatus = orderStatusModel;
@@ -108,11 +108,11 @@ public class OrderModel {
     public void setDate(String date) {
         this.date = date;
     }
-    public Float getPrice() {
-        return price;
+    public Float getPriceOrder() {
+        return priceOrder;
     }
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setPriceOrder(Float priceOrder) {
+        this.priceOrder = priceOrder;
     }
     public CustomerModel getCustomer() { return this.customer; }
     public void setCustomer(CustomerModel customer) {

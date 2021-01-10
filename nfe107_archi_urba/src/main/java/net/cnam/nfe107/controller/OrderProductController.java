@@ -1,15 +1,11 @@
 package net.cnam.nfe107.controller;
 
-import net.cnam.nfe107.controller.dto.OrderProductRequest;
-import net.cnam.nfe107.controller.dto.OrderProductResponse;
-import net.cnam.nfe107.controller.dto.OrderRequest;
-import net.cnam.nfe107.controller.dto.OrderResponse;
+import net.cnam.nfe107.controller.dto.*;
 import net.cnam.nfe107.domain.OrderProductService;
 import net.cnam.nfe107.domain.OrderService;
 import net.cnam.nfe107.domain.ProductService;
 import net.cnam.nfe107.domain.entity.*;
 import net.cnam.nfe107.repository.model.OrderModel;
-import net.cnam.nfe107.repository.model.OrderProductIdModel;
 import net.cnam.nfe107.repository.model.OrderProductModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,20 +30,29 @@ public class OrderProductController {
 
     @GetMapping("/getAllOrderProduct")
     @ResponseBody
-    public ResponseEntity<ArrayList<OrderProductResponse>> getAllOrderProduct() {
+    public ResponseEntity<ArrayList<OrderProductResponseSmartList>> getAllOrderProduct()
+    {
+        List<OrderModel> orders = orderService.getAllOrders();
+        ArrayList<OrderProductResponseSmartList> products = new ArrayList<>();
 
-        List<OrderProductModel> orderProductFound = orderProductService.getAllOrderProduct();
-        ArrayList<OrderProductResponse> orderProductResponse = new ArrayList<>();
+        for (OrderModel orderModel:orders)
+        {
+            ArrayList<OrderProductResponseWithoutIdOrder> listOfOrderProductResponseWithoutIdOrder = new ArrayList<>();
 
-        for (OrderProductModel orderProductModel:orderProductFound) {
-            Order order = new Order(orderProductModel.getOrder());
-            Product product = new Product(orderProductModel.getProduct());
-            OrderProductResponse orderProduct1 = new OrderProductResponse(order, product, orderProductModel.getQuantity());
+            var ordersProducts = orderModel.getOrdersProducts();
+            OrderProductResponseSmartList orderProductResponseSmartList2 = new OrderProductResponseSmartList();
 
-            orderProductResponse.add(orderProduct1);
+            for (OrderProductModel orderProductModel:ordersProducts)
+            {
+                listOfOrderProductResponseWithoutIdOrder.add(new OrderProductResponseWithoutIdOrder(new Order(orderProductModel.getOrder()), new Product(orderProductModel.getProduct()), orderProductModel.getQuantity()));
+            }
+
+            orderProductResponseSmartList2.setIdOrder(orderModel.getIdOrder());
+            orderProductResponseSmartList2.setList(listOfOrderProductResponseWithoutIdOrder);
+            products.add(orderProductResponseSmartList2);
         }
 
-        return new ResponseEntity<>(orderProductResponse, HttpStatus.OK);
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @GetMapping("/order/{idOrder}/product/{idProduct}")

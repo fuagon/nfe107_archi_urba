@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -37,11 +38,11 @@ public class OrderService {
         return new Order(orderModelFound, customer, address, orderStatus);
     }
 
-    public Order create(OrderToCreate orderToCreate, Customer customer, Address address, OrderStatus orderStatus)
+    public Order create(OrderToCreate orderToCreate)
     {
-        CustomerModel customerModel = new CustomerModel(customer);
-        AddressModel addressModel = new AddressModel(address);
-        OrderStatusModel orderStatusModel = new OrderStatusModel(orderStatus);
+        CustomerModel customerModel = new CustomerModel(orderToCreate.getCustomer());
+        AddressModel addressModel = new AddressModel(orderToCreate.getAddress());
+        OrderStatusModel orderStatusModel = new OrderStatusModel(orderToCreate.getOrderStatus());
         OrderModel orderModelToCreate = new OrderModel(orderToCreate, customerModel, addressModel, orderStatusModel);
 
         OrderModel orderModelCreated = orderRepository.save(orderModelToCreate);
@@ -61,5 +62,11 @@ public class OrderService {
     public void delete(Long id)
     {
         orderRepository.deleteById(id);
+    }
+
+    public Set<OrderProductModel> getOrdersProduct(Order order)
+    {
+        OrderModel orderModel = new OrderModel(order);
+        return orderModel.getOrdersProducts();
     }
 }

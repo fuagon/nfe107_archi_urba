@@ -9,16 +9,16 @@ public class ProductRequest {
     private Long idProduct;
     private String name;
     private String description;
-    private Float price;
+    private Float priceProduct;
     private Long stock;
 
 //Constructors
 
-    public ProductRequest(Long idProduct, String name, String description, Float price, Long stock) {
+    public ProductRequest(Long idProduct, String name, String description, Float priceProduct, Long stock) {
         this.idProduct = idProduct;
         this.name = name;
         this.description = description;
-        this.price = price;
+        this.priceProduct = priceProduct;
         this.stock = stock;
     }
 
@@ -26,7 +26,7 @@ public class ProductRequest {
         this.idProduct = product.getIdProduct();
         this.name = product.getName();
         this.description = product.getDescription();
-        this.price = product.getPrice();
+        this.priceProduct = product.getPriceProduct();
         this.stock = product.getStock();
 
     }
@@ -39,8 +39,8 @@ public class ProductRequest {
     public void setName(String name) { this.name = name; }
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
-    public Float getPrice() { return price; }
-    public void setPrice(Float price) { this.price = price; }
+    public Float getPriceProduct() { return priceProduct; }
+    public void setPriceProduct(Float priceProduct) { this.priceProduct = priceProduct; }
     public Long getStock() {
         return stock;
     }

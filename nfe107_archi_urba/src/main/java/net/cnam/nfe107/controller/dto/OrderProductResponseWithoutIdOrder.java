@@ -1,35 +1,31 @@
 package net.cnam.nfe107.controller.dto;
 
-import net.cnam.nfe107.domain.OrderProductService;
 import net.cnam.nfe107.domain.entity.Order;
 import net.cnam.nfe107.domain.entity.OrderProduct;
 import net.cnam.nfe107.domain.entity.Product;
 
-public class OrderProductResponse {
+public class OrderProductResponseWithoutIdOrder {
 
     private Order order;
     private Product product;
     private Long quantity;
 
-    public OrderProductResponse() {
+    public OrderProductResponseWithoutIdOrder() {
     }
 
-    public OrderProductResponse(Order order, Product product, Long quantity) {
+    public OrderProductResponseWithoutIdOrder(Order order, Product product, Long quantity) {
         this.order = order;
         this.product = product;
         this.quantity = quantity;
     }
 
-    public OrderProductResponse(OrderProduct orderProduct)
+    public OrderProductResponseWithoutIdOrder(OrderProduct orderProduct)
     {
         this.order = orderProduct.getOrder();
         this.product = orderProduct.getProduct();
         this.quantity = orderProduct.getQuantity();
     }
 
-    public Long getIdOrder() {
-        return order.getIdOrder();
-    }
     public void setOrder(Order Order) {
         this.order = order;
     }

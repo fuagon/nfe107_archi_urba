@@ -69,10 +69,10 @@ public class OrderController {
     public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest orderRequest) {
         OrderToCreate orderToCreate = new OrderToCreate(orderRequest);
 
-        Customer customerFound = customerService.getById(orderRequest.getIdCustomer());
-        Address addressFound = addressService.getById(orderRequest.getIdAddress());
-        OrderStatus orderStatusFound = orderStatusService.getById(orderRequest.getIdOrderStatus());
-        Order orderCreated = orderService.create(orderToCreate, customerFound, addressFound, orderStatusFound);
+        orderToCreate.setCustomer(customerService.getById(orderRequest.getIdCustomer()));
+        orderToCreate.setAddress(addressService.getById(orderRequest.getIdAddress()));
+        orderToCreate.setOrderStatus(orderStatusService.getById(orderRequest.getIdOrderStatus()));
+        Order orderCreated = orderService.create(orderToCreate);
 
         OrderResponse orderResponse = new OrderResponse(orderCreated);
 

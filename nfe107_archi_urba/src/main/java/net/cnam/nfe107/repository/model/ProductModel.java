@@ -24,8 +24,8 @@ public class ProductModel {
     @Column(name = "description", length = 500)
     private String description;
 
-    @Column(name = "price")
-    private Float price;
+    @Column(name = "price_product")
+    private Float priceProduct;
 
     @Column(name = "stock")
     private Long stock;
@@ -37,11 +37,11 @@ public class ProductModel {
     public ProductModel() {
     }
 
-    public ProductModel(Long idProduct, String name, String description, Float price, Long stock) {
+    public ProductModel(Long idProduct, String name, String description, Float priceProduct, Long stock) {
         this.idProduct = idProduct;
         this.name = name;
         this.description = description;
-        this.price = price;
+        this.priceProduct = priceProduct;
         this.stock = stock;
     }
 
@@ -49,14 +49,14 @@ public class ProductModel {
         this.idProduct = product.getIdProduct();
         this.name = product.getName();
         this.description = product.getDescription();
-        this.price = product.getPrice();
+        this.priceProduct = product.getPriceProduct();
         this.stock = product.getStock();
     }
 
     public ProductModel(ProductToCreate productToCreate) {
         this.name = productToCreate.getName();
         this.description = productToCreate.getDescription();
-        this.price = productToCreate.getPrice();
+        this.priceProduct = productToCreate.getPriceProduct();
         this.stock = productToCreate.getStock();
     }
 
@@ -78,11 +78,11 @@ public class ProductModel {
     public void setDescription(String description) {
         this.description = description;
     }
-    public Float getPrice() {
-        return price;
+    public Float getPriceProduct() {
+        return priceProduct;
     }
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setPriceProduct(Float priceProduct) {
+        this.priceProduct = priceProduct;
     }
     @Nullable
     public Set<OrderProductModel> getOrders() {

@@ -1,6 +1,7 @@
 package net.cnam.nfe107.domain.entity;
 
 import net.cnam.nfe107.controller.dto.AddressRequest;
+import net.cnam.nfe107.controller.dto.SignUpRequest;
 import net.cnam.nfe107.repository.model.AddressModel;
 
 public class AddressToCreate {
@@ -36,6 +37,14 @@ public class AddressToCreate {
         this.addressNumber = addressRequest.getAddressNumber();
         this.street = addressRequest.getStreet();
         this.idCustomer = addressRequest.getIdCustomer();
+    }
+
+    public AddressToCreate(SignUpRequest signUpRequest) {
+        this.country = signUpRequest.getCountry();
+        this.city = signUpRequest.getCity();
+        this.postalCode = signUpRequest.getPostalCode();
+        this.addressNumber = signUpRequest.getAddressNumber();
+        this.street = signUpRequest.getStreet();
     }
 
     public String getCountry() {

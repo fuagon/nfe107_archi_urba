@@ -31,7 +31,7 @@ public class CustomerModel {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "loyalty_points")
+    @Column(name = "loyalty_points", columnDefinition = "integer default 0")
     private Long loyaltyPoints;
 
     @OneToMany(mappedBy = "customer", targetEntity = AddressModel.class, cascade = CascadeType.ALL)

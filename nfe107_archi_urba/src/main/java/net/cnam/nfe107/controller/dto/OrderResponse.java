@@ -12,7 +12,7 @@ public class OrderResponse {
 
     private Long idOrder;
     private String date;
-    private Float price;
+    private Float priceOrder;
     private Customer customer;
     private Address address;
     private OrderStatus orderStatus;
@@ -22,16 +22,16 @@ public class OrderResponse {
     public OrderResponse() {
     }
 
-    public OrderResponse(Long idOrder, String date, Float price) {
+    public OrderResponse(Long idOrder, String date, Float priceOrder) {
         this.idOrder = idOrder;
         this.date = date;
-        this.price = price;
+        this.priceOrder = priceOrder;
     }
 
     public OrderResponse(Order order) {
         this.idOrder = order.getIdOrder();
         this.date = order.getDate();
-        this.price = order.getPrice();
+        this.priceOrder = order.getPriceOrder();
         this.customer = order.getCustomer();
         this.address = order.getAddress();
         this.orderStatus = order.getOrderStatus();
@@ -40,13 +40,13 @@ public class OrderResponse {
     public OrderResponse(OrderModel orderModel) {
         this.idOrder = orderModel.getIdOrder();
         this.date = orderModel.getDate();
-        this.price = orderModel.getPrice();
+        this.priceOrder = orderModel.getPriceOrder();
     }
 
     public OrderResponse(Order order, Customer customer, Address address, OrderStatus orderStatus) {
         this.idOrder = order.getIdOrder();
         this.date = order.getDate();
-        this.price = order.getPrice();
+        this.priceOrder = order.getPriceOrder();
         this.customer = customer;
         this.address = address;
         this.orderStatus = orderStatus;
@@ -66,11 +66,11 @@ public class OrderResponse {
     public void setDate(String date) {
         this.date = date;
     }
-    public Float getPrice() {
-        return price;
+    public Float getPriceOrder() {
+        return priceOrder;
     }
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setPriceOrder(Float priceOrder) {
+        this.priceOrder = priceOrder;
     }
     public Long getIdCustomer() { return customer.getIdCustomer(); }
     public void setCustomer(Customer customer) { this.customer = customer; }

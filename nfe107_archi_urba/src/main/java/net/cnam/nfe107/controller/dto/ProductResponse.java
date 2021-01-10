@@ -10,16 +10,16 @@ public class ProductResponse {
     private Long idProduct;
     private String name;
     private String description;
-    private Float price;
+    private Float priceProduct;
     private Long stock;
 
 //Constructors
 
-    public ProductResponse(Long idProduct, String name, String description, Float price, Long stock) {
+    public ProductResponse(Long idProduct, String name, String description, Float priceProduct, Long stock) {
         this.idProduct = idProduct;
         this.name = name;
         this.description = description;
-        this.price = price;
+        this.priceProduct = priceProduct;
         this.stock = stock;
     }
 
@@ -27,7 +27,7 @@ public class ProductResponse {
         this.idProduct = productResponse.getIdProduct();
         this.name = productResponse.getName();
         this.description = productResponse.getDescription();
-        this.price = productResponse.getPrice();
+        this.priceProduct = productResponse.getPriceProduct();
         this.stock = productResponse.getStock();
     }
 
@@ -35,7 +35,7 @@ public class ProductResponse {
         this.idProduct = productModel.getIdProduct();
         this.name = productModel.getName();
         this.description = productModel.getDescription();
-        this.price = productModel.getPrice();
+        this.priceProduct = productModel.getPriceProduct();
         this.stock = productModel.getStock();
     }
 
@@ -47,8 +47,8 @@ public class ProductResponse {
     public void setName(String name) { this.name = name; }
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
-    public Float getPrice() { return price; }
-    public void setPrice(Float price) { this.price = price; }
+    public Float getPriceProduct() { return priceProduct; }
+    public void setPriceProduct(Float priceProduct) { this.priceProduct = priceProduct; }
     public Long getStock() {
         return stock;
     }
