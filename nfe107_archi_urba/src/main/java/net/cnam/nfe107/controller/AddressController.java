@@ -28,13 +28,11 @@ public class AddressController {
     @GetMapping("/getAllAddresses")
     @ResponseBody
     public ResponseEntity<ArrayList<AddressResponse>> getAllAddresses() {
-        List<Address> addressFound = addressService.getAllAddresses();
+        List<Address> addresses = addressService.getAllAddresses();
         ArrayList<AddressResponse> addressesResponse = new ArrayList<>();
 
-        for (Address address:addressFound) {
-            Customer customer = customerService.getById(address.getCustomer().getIdCustomer());
-            AddressResponse address1 = new AddressResponse(address, customer);
-            addressesResponse.add(address1);
+        for (Address address:addresses) {
+            addressesResponse.add(new AddressResponse(address, address.getCustomer()));
         }
 
         return new ResponseEntity<>(addressesResponse, HttpStatus.OK);
@@ -43,9 +41,9 @@ public class AddressController {
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<AddressResponse> getAddress(@PathVariable("id") Long id) {
-        Address addressFound = addressService.getById(id);
+        Address address = addressService.getById(id);
 
-        AddressResponse addressResponse = new AddressResponse(addressFound, addressFound.getCustomer());
+        AddressResponse addressResponse = new AddressResponse(address, address.getCustomer());
 
         return new ResponseEntity<>(addressResponse, HttpStatus.OK);
     }
@@ -67,8 +65,8 @@ public class AddressController {
     @ResponseBody
     public ResponseEntity<AddressResponse> updateAddress(@RequestBody AddressRequest addressRequest)
     {
-        Customer customerFound = customerService.getById(addressRequest.getIdCustomer());
-        Address addressToUpdate = new Address(addressRequest, customerFound);
+        Customer customer = customerService.getById(addressRequest.getIdCustomer());
+        Address addressToUpdate = new Address(addressRequest, customer);
 
         Address addressUpdated = addressService.update(addressToUpdate);
 

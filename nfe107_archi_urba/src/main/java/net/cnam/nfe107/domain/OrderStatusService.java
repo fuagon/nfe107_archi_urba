@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,12 +20,16 @@ public class OrderStatusService {
     @Autowired
     private OrderStatusRepository orderStatusRepository;
 
-    public List<OrderStatusModel> getAllOrderStatus() {
-        List<OrderStatusModel> orderStatus;
+    public List<OrderStatus> getAllOrderStatus() {
+        List<OrderStatusModel> orderStatusesFromModel = orderStatusRepository.findAll();
+        ArrayList<OrderStatus> orderStatuses = new ArrayList<>();
 
-        orderStatus = orderStatusRepository.findAll();
+        for(OrderStatusModel orderStatusModel:orderStatusesFromModel)
+        {
+            orderStatuses.add(new OrderStatus(orderStatusModel));
+        }
 
-        return orderStatus;
+        return orderStatuses;
     }
 
     public OrderStatus getById(Long idOrderStatus) {

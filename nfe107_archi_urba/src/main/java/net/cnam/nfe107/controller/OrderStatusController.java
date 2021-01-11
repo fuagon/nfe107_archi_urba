@@ -29,16 +29,14 @@ public class OrderStatusController {
     @ResponseBody
     public ResponseEntity<ArrayList<OrderStatusResponse>> getAllOrderStatus() {
 
-        List<OrderStatusModel> orderStatusFound = orderStatusService.getAllOrderStatus();
-        ArrayList<OrderStatusResponse> ordersResponse = new ArrayList<>();
+        List<OrderStatus> orderStatuses = orderStatusService.getAllOrderStatus();
+        ArrayList<OrderStatusResponse> ordersStatusResponse = new ArrayList<>();
 
-        for (OrderStatusModel orderStatusModel:orderStatusFound) {
-            OrderStatusResponse orderStatusResponse = new OrderStatusResponse(orderStatusModel);
-
-            ordersResponse.add(orderStatusResponse);
+        for (OrderStatus orderStatus:orderStatuses) {
+            ordersStatusResponse.add(new OrderStatusResponse(orderStatus));
         }
 
-        return new ResponseEntity<>(ordersResponse, HttpStatus.OK);
+        return new ResponseEntity<>(ordersStatusResponse, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

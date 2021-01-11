@@ -45,8 +45,10 @@ public class OrderManagerController {
 
         OrderToCreate orderToCreate = new OrderToCreate(addProductToOrderRequest, customer, address, orderStatus);
 
+        //Création d'une nouvelle commande
         Order order = orderManagerService.createOrder(orderToCreate);
 
+        //Ajout d'un produit à la commande
         orderManagerService.addProductToOrder(order, product, addProductToOrderRequest.getQuantity());
 
         return ResponseEntity.status(200).build();
@@ -59,14 +61,14 @@ public class OrderManagerController {
         Product product = productService.getById(addProductToOrderRequest.getIdProduct());
         Long quantity = addProductToOrderRequest.getQuantity();
 
-        //On vérifie qu'il y a suffisamment de stock, d'après la quantité donnée
+        //On vérifie qu'il y a suffisamment de stock pour la quantité donnée
         boolean res = orderManagerService.verifyStockOnProduct(product, quantity);
 
         if (!res) {
             return ResponseEntity.status(204).build();
         }
 
-        //On ajoute le produit à la commande
+        //On ajoute le produit à la commande si le test précédent est passé
         boolean res2 = orderManagerService.addProductToOrder(order, product, quantity);
 
         if (!res2) {

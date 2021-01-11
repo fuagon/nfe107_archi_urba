@@ -2,17 +2,17 @@ package net.cnam.nfe107.controller.dto;
 
 import java.util.ArrayList;
 
-public class OrderProductResponseSmartList {
+public class OrderProductSmartListResponse {
 
     private Long idOrder;
 
     //Contient le produit et sa quantité
-    private ArrayList<OrderProductResponseWithoutIdOrder> products;
+    private ArrayList<OrderProductWithoutIdOrderResponse> products;
 
-    public OrderProductResponseSmartList() {
+    public OrderProductSmartListResponse() {
     }
 
-    public OrderProductResponseSmartList(Long idOrder, ArrayList<OrderProductResponseWithoutIdOrder> products) {
+    public OrderProductSmartListResponse(Long idOrder, ArrayList<OrderProductWithoutIdOrderResponse> products) {
         this.idOrder = idOrder;
         this.products = products;
     }
@@ -23,10 +23,10 @@ public class OrderProductResponseSmartList {
     public void setIdOrder(Long idOrder) {
         this.idOrder = idOrder;
     }
-    public ArrayList<OrderProductResponseWithoutIdOrder> getList() {
+    public ArrayList<OrderProductWithoutIdOrderResponse> getProducts() {
         return products;
     }
-    public void setList(ArrayList<OrderProductResponseWithoutIdOrder> products) {
+    public void setProducts(ArrayList<OrderProductWithoutIdOrderResponse> products) {
         this.products = products;
     }
 }

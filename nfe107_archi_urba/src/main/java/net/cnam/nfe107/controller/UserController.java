@@ -30,6 +30,7 @@ public class UserController {
         CustomerToCreate customerToCreate = new CustomerToCreate(signUpRequest);
         AddressToCreate addressToCreate = new AddressToCreate(signUpRequest);
 
+        //On crée l'utilisateur désiré
         userService.signUpUser(customerToCreate, addressToCreate);
 
         return ResponseEntity.status(200).build();
@@ -39,8 +40,8 @@ public class UserController {
     @RequestMapping("/delete")
     public ResponseEntity<?> delete(@RequestBody DeleteUserRequest deleteUserRequest)
     {
-        Customer customer = customerService.getById(deleteUserRequest.getIdCustomer());
-        userService.deleteUser(customer);
+        //On supprime l'utilisateur désiré
+        userService.deleteUser(customerService.getById(deleteUserRequest.getIdCustomer()));
 
         return ResponseEntity.status(200).build();
     }

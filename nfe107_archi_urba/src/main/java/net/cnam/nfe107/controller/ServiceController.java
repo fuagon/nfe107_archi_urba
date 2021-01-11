@@ -33,9 +33,8 @@ public class ServiceController {
         OrderProduct orderProduct = orderProductService.getById(orderProductRequest.getIdOrder(), orderProductRequest.getIdProduct());
         orderProduct.setQuantity(orderProduct.getQuantity() + orderProductRequest.getQuantity());
 
-        orderProduct = orderProductService.update(orderProduct);
-
-        OrderProductResponse orderProductResponse = new OrderProductResponse(orderProduct);
+        //On met à jour orderProduct, et l'affecte à la variable de retour
+        OrderProductResponse orderProductResponse = new OrderProductResponse(orderProductService.update(orderProduct));
 
         return new ResponseEntity<>(orderProductResponse, HttpStatus.OK);
     }
@@ -47,9 +46,8 @@ public class ServiceController {
         OrderProduct orderProduct = orderProductService.getById(orderProductRequest.getIdOrder(), orderProductRequest.getIdProduct());
         orderProduct.setQuantity(orderProduct.getQuantity() - orderProductRequest.getQuantity());
 
-        orderProduct = orderProductService.update(orderProduct);
-
-        OrderProductResponse orderProductResponse = new OrderProductResponse(orderProduct);
+        //On met à jour orderProduct, et l'affecte à la variable de retour
+        OrderProductResponse orderProductResponse = new OrderProductResponse(orderProductService.update(orderProduct));
 
         return new ResponseEntity<>(orderProductResponse, HttpStatus.OK);
     }
@@ -61,9 +59,8 @@ public class ServiceController {
         Customer customer = customerService.getById(loyaltyPointsRequest.getIdCustomer());
         customer.setLoyaltyPoints(customer.getLoyaltyPoints() + loyaltyPointsRequest.getLoyaltyPoints());
 
-        customer = customerService.update(customer);
-
-        CustomerResponse customerResponse = new CustomerResponse(customer);
+        //On met à jour customer, et l'affecte à la variable de retour
+        CustomerResponse customerResponse = new CustomerResponse(customerService.update(customer));
 
         return new ResponseEntity<>(customerResponse, HttpStatus.OK);
     }
@@ -75,9 +72,8 @@ public class ServiceController {
         Customer customer = customerService.getById(loyaltyPointsRequest.getIdCustomer());
         customer.setLoyaltyPoints(customer.getLoyaltyPoints() - loyaltyPointsRequest.getLoyaltyPoints());
 
-        customer = customerService.update(customer);
-
-        CustomerResponse customerResponse = new CustomerResponse(customer);
+        //On met à jour customer, et l'affecte à la variable de retour
+        CustomerResponse customerResponse = new CustomerResponse(customerService.update(customer));
 
         return new ResponseEntity<>(customerResponse, HttpStatus.OK);
     }
@@ -89,9 +85,8 @@ public class ServiceController {
         Product product = productService.getById(productRequest.getIdProduct());
         product.setStock(product.getStock() + productRequest.getStock());
 
-        product = productService.update(product);
-
-        ProductResponse productResponse = new ProductResponse(product);
+        //On met à jour product, et l'affecte à la variable de retour
+        ProductResponse productResponse = new ProductResponse(productService.update(product));
 
         return new ResponseEntity<>(productResponse, HttpStatus.OK);
     }
@@ -103,9 +98,8 @@ public class ServiceController {
         Product product = productService.getById(productRequest.getIdProduct());
         product.setStock(product.getStock() - productRequest.getStock());
 
-        product = productService.update(product);
-
-        ProductResponse productResponse = new ProductResponse(product);
+        //On met à jour product, et l'affecte à la variable de retour
+        ProductResponse productResponse = new ProductResponse(productService.update(product));
 
         return new ResponseEntity<>(productResponse, HttpStatus.OK);
     }
@@ -118,9 +112,8 @@ public class ServiceController {
         OrderStatus orderStatus = orderStatusService.getById(orderRequest.getIdOrderStatus());
         order.setOrderStatus(orderStatus);
 
-        order = orderService.update(order);
-
-        OrderResponse orderResponse = new OrderResponse(order);
+        //On met à jour order, et l'affecte à la variable de retour
+        OrderResponse orderResponse = new OrderResponse(orderService.update(order));
 
         return new ResponseEntity<>(orderResponse, HttpStatus.OK);
     }

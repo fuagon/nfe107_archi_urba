@@ -1,9 +1,11 @@
 package net.cnam.nfe107.domain;
 
+import net.cnam.nfe107.domain.entity.Address;
 import net.cnam.nfe107.domain.entity.Customer;
 import net.cnam.nfe107.domain.entity.Customer;
 import net.cnam.nfe107.domain.entity.CustomerToCreate;
 import net.cnam.nfe107.repository.CustomerRepository;
+import net.cnam.nfe107.repository.model.AddressModel;
 import net.cnam.nfe107.repository.model.CustomerModel;
 import net.cnam.nfe107.repository.model.CustomerModel;
 import net.cnam.nfe107.repository.model.CustomerModel;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,10 +23,13 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public List<CustomerModel> getAllCustomers() {
-        List<CustomerModel> customers;
+    public List<Customer> getAllCustomers() {
+        List<CustomerModel> customersFromModel = customerRepository.findAll();
+        ArrayList<Customer> customers = new ArrayList<>();
 
-        customers = customerRepository.findAll();
+        for (CustomerModel customerModel:customersFromModel) {
+            customers.add(new Customer(customerModel));
+        }
 
         return customers;
     }

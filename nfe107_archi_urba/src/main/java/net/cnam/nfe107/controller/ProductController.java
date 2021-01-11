@@ -24,13 +24,11 @@ public class ProductController {
     @GetMapping("/getAllProducts")
     @ResponseBody
     public ResponseEntity<ArrayList<ProductResponse>> getAllProducts() {
-
-        List<ProductModel> productFound = productService.getAllProducts();
+        List<Product> products = productService.getAllProducts();
         ArrayList<ProductResponse> productsResponse = new ArrayList<>();
 
-        for (ProductModel product:productFound) {
-            ProductResponse product1 = new ProductResponse(product);
-            productsResponse.add(product1);
+        for (Product product:products) {
+            productsResponse.add(new ProductResponse(product));
         }
 
         return new ResponseEntity<>(productsResponse, HttpStatus.OK);

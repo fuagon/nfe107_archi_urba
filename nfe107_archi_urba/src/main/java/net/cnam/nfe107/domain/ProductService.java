@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,10 +20,14 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public List<ProductModel> getAllProducts() {
-        List<ProductModel> products;
+    public List<Product> getAllProducts() {
+        List<ProductModel> productsFromModel = productRepository.findAll();
+        ArrayList<Product> products = new ArrayList<>();
 
-        products = productRepository.findAll();
+        for(ProductModel productModel: productsFromModel)
+        {
+            products.add(new Product(productModel));
+        }
 
         return products;
     }

@@ -30,8 +30,7 @@ public class CustomerServiceUnit {
     public void removeLoyaltyPoints(Long idCustomer, Long loyaltyPoints) {
         Customer customer = customerService.getById(idCustomer);
 
-        if (customer.getLoyaltyPoints() >= loyaltyPoints)
-        {
+        if (customer.getLoyaltyPoints() >= loyaltyPoints) {
             customer.setLoyaltyPoints(customer.getLoyaltyPoints() - loyaltyPoints);
         }
 

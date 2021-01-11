@@ -24,13 +24,11 @@ public class CustomerController {
     @GetMapping("/getAllCustomers")
     @ResponseBody
     public ResponseEntity<ArrayList<CustomerResponse>> getAllCustomers() {
-
-        List<CustomerModel> customerFound = customerService.getAllCustomers();
+        List<Customer> customers = customerService.getAllCustomers();
         ArrayList<CustomerResponse> customersResponse = new ArrayList<>();
 
-        for (CustomerModel customer:customerFound) {
-            CustomerResponse customer1 = new CustomerResponse(customer);
-            customersResponse.add(customer1);
+        for (Customer customer:customers) {
+            customersResponse.add(new CustomerResponse(customer));
         }
 
         return new ResponseEntity<>(customersResponse, HttpStatus.OK);
@@ -39,9 +37,9 @@ public class CustomerController {
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<CustomerResponse> getCustomer(@PathVariable("id") Long id) {
-        Customer customerFound = customerService.getById(id);
+        Customer customer = customerService.getById(id);
 
-        CustomerResponse customerResponse = new CustomerResponse(customerFound);
+        CustomerResponse customerResponse = new CustomerResponse(customer);
 
         return new ResponseEntity<>(customerResponse, HttpStatus.OK);
     }
@@ -63,7 +61,6 @@ public class CustomerController {
     public ResponseEntity<CustomerResponse> updateCustomer(@RequestBody CustomerRequest customerRequest)
     {
         Customer customerToUpdate = new Customer(customerRequest);
-
         Customer customerUpdated = customerService.update(customerToUpdate);
 
         CustomerResponse customerResponse = new CustomerResponse(customerUpdated);

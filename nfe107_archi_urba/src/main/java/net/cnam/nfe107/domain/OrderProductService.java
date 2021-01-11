@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,10 +18,13 @@ public class OrderProductService {
     @Autowired
     private OrderProductRepository orderProductRepository;
 
-    public List<OrderProductModel> getAllOrderProduct() {
-        List<OrderProductModel> orderProducts;
+    public List<OrderProduct> getAllOrderProduct() {
+        List<OrderProductModel> orderProductsFromModel = orderProductRepository.findAll();
+        ArrayList<OrderProduct> orderProducts = new ArrayList<>();
 
-        orderProducts = orderProductRepository.findAll();
+        for (OrderProductModel orderProductModel:orderProductsFromModel) {
+            orderProducts.add(new OrderProduct(orderProductModel));
+        }
 
         return orderProducts;
     }

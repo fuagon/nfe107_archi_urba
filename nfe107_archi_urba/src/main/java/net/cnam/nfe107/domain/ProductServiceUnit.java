@@ -1,14 +1,8 @@
 package net.cnam.nfe107.domain;
 
-import net.cnam.nfe107.controller.dto.ProductRequest;
-import net.cnam.nfe107.controller.dto.ProductResponse;
 import net.cnam.nfe107.domain.entity.Product;
-import net.cnam.nfe107.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
 

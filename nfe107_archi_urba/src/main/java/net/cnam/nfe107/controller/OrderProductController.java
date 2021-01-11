@@ -30,29 +30,26 @@ public class OrderProductController {
 
     @GetMapping("/getAllOrderProduct")
     @ResponseBody
-    public ResponseEntity<ArrayList<OrderProductResponseSmartList>> getAllOrderProduct()
+    public ResponseEntity<ArrayList<OrderProductSmartListResponse>> getAllOrderProduct()
     {
-        List<OrderModel> orders = orderService.getAllOrders();
-        ArrayList<OrderProductResponseSmartList> products = new ArrayList<>();
+        List<Order> orders = orderService.getAllOrders();
+        ArrayList<OrderProductSmartListResponse> orderProducts = new ArrayList<>();
 
-        for (OrderModel orderModel:orders)
+        for (Order order:orders)
         {
-            ArrayList<OrderProductResponseWithoutIdOrder> listOfOrderProductResponseWithoutIdOrder = new ArrayList<>();
+            ArrayList<OrderProductWithoutIdOrderResponse> listOfOrderProductResponseWithoutIdOrder = new ArrayList<>();
 
-            var ordersProducts = orderModel.getOrdersProducts();
-            OrderProductResponseSmartList orderProductResponseSmartList2 = new OrderProductResponseSmartList();
+            var ordersProducts = order.getOrderProducts();
 
             for (OrderProductModel orderProductModel:ordersProducts)
             {
-                listOfOrderProductResponseWithoutIdOrder.add(new OrderProductResponseWithoutIdOrder(new Order(orderProductModel.getOrder()), new Product(orderProductModel.getProduct()), orderProductModel.getQuantity()));
+                listOfOrderProductResponseWithoutIdOrder.add(new OrderProductWithoutIdOrderResponse(new Order(orderProductModel.getOrder()), new Product(orderProductModel.getProduct()), orderProductModel.getQuantity()));
             }
 
-            orderProductResponseSmartList2.setIdOrder(orderModel.getIdOrder());
-            orderProductResponseSmartList2.setList(listOfOrderProductResponseWithoutIdOrder);
-            products.add(orderProductResponseSmartList2);
+            orderProducts.add(new OrderProductSmartListResponse(order.getIdOrder(), listOfOrderProductResponseWithoutIdOrder));
         }
 
-        return new ResponseEntity<>(products, HttpStatus.OK);
+        return new ResponseEntity<>(orderProducts, HttpStatus.OK);
     }
 
     @GetMapping("/order/{idOrder}/product/{idProduct}")

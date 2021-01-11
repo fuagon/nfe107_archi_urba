@@ -36,16 +36,11 @@ public class OrderController {
     @ResponseBody
     public ResponseEntity<ArrayList<OrderResponse>> getAllOrders() {
 
-        List<OrderModel> orderFound = orderService.getAllOrders();
+        List<Order> orders = orderService.getAllOrders();
         ArrayList<OrderResponse> ordersResponse = new ArrayList<>();
 
-        for (OrderModel orderModel:orderFound) {
-            Customer customer = customerService.getById(orderModel.getCustomer().getIdCustomer());
-            Address address = addressService.getById(orderModel.getAddress().getIdAddress());
-            OrderStatus orderStatus = orderStatusService.getById(orderModel.getOrderStatus().getIdOrderStatus());
-            OrderResponse order1 = new OrderResponse(new Order(orderModel), customer, address, orderStatus);
-
-            ordersResponse.add(order1);
+        for (Order order:orders) {
+            ordersResponse.add(new OrderResponse(order, order.getCustomer(), order.getAddress(), order.getOrderStatus()));
         }
 
         return new ResponseEntity<>(ordersResponse, HttpStatus.OK);
@@ -54,12 +49,9 @@ public class OrderController {
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<OrderResponse> getOrder(@PathVariable("id") Long id) {
-        Order orderFound = orderService.getById(id);
-        Customer customerFound = customerService.getById(orderFound.getCustomer().getIdCustomer());
-        Address addressFound = addressService.getById(orderFound.getAddress().getIdAddress());
-        OrderStatus orderStatusFound = orderStatusService.getById(orderFound.getOrderStatus().getIdOrderStatus());
+        Order order = orderService.getById(id);
 
-        OrderResponse orderResponse = new OrderResponse(orderFound, customerFound, addressFound, orderStatusFound);
+        OrderResponse orderResponse = new OrderResponse(order, order.getCustomer(), order.getAddress(), order.getOrderStatus());
 
         return new ResponseEntity<>(orderResponse, HttpStatus.OK);
     }
@@ -83,10 +75,10 @@ public class OrderController {
     @ResponseBody
     public ResponseEntity<OrderResponse> updateOrder(@RequestBody OrderRequest orderRequest)
     {
-        Customer customerFound = customerService.getById(orderRequest.getIdCustomer());
-        Address addressFound = addressService.getById(orderRequest.getIdAddress());
-        OrderStatus orderStatusFound = orderStatusService.getById(orderRequest.getIdOrderStatus());
-        Order orderToUpdate = new Order(orderRequest, customerFound, addressFound, orderStatusFound);
+        Customer customer = customerService.getById(orderRequest.getIdCustomer());
+        Address address = addressService.getById(orderRequest.getIdAddress());
+        OrderStatus orderStatus = orderStatusService.getById(orderRequest.getIdOrderStatus());
+        Order orderToUpdate = new Order(orderRequest, customer, address, orderStatus);
 
         Order orderUpdated = orderService.update(orderToUpdate);
 

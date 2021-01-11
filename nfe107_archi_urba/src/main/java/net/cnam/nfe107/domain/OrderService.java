@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -21,10 +22,14 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    public List<OrderModel> getAllOrders() {
-        List<OrderModel> orders;
+    public List<Order> getAllOrders() {
+        List<OrderModel> ordersFromModel = orderRepository.findAll();
+        ArrayList<Order> orders = new ArrayList<>();
 
-        orders = orderRepository.findAll();
+        for(OrderModel orderModel:ordersFromModel)
+        {
+            orders.add(new Order(orderModel));
+        }
 
         return orders;
     }

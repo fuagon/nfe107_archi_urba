@@ -4,22 +4,22 @@ import net.cnam.nfe107.domain.entity.Order;
 import net.cnam.nfe107.domain.entity.OrderProduct;
 import net.cnam.nfe107.domain.entity.Product;
 
-public class OrderProductResponseWithoutIdOrder {
+public class OrderProductWithoutIdOrderResponse {
 
     private Order order;
     private Product product;
     private Long quantity;
 
-    public OrderProductResponseWithoutIdOrder() {
+    public OrderProductWithoutIdOrderResponse() {
     }
 
-    public OrderProductResponseWithoutIdOrder(Order order, Product product, Long quantity) {
+    public OrderProductWithoutIdOrderResponse(Order order, Product product, Long quantity) {
         this.order = order;
         this.product = product;
         this.quantity = quantity;
     }
 
-    public OrderProductResponseWithoutIdOrder(OrderProduct orderProduct)
+    public OrderProductWithoutIdOrderResponse(OrderProduct orderProduct)
     {
         this.order = orderProduct.getOrder();
         this.product = orderProduct.getProduct();

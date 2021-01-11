@@ -20,9 +20,12 @@ public class AddressService {
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private CustomerService customerService;
+
     public List<Address> getAllAddresses() {
-        List<Address> addresses = new ArrayList<>();
         List<AddressModel> addressesFromModel = addressRepository.findAll();
+        ArrayList<Address> addresses = new ArrayList<>();
 
         for (AddressModel addressModel:addressesFromModel) {
             addresses.add(new Address(addressModel));
