@@ -1,14 +1,3 @@
--- TABLE CUSTOMER
-INSERT INTO TABLE_CUSTOMER (id_customer, firstname, lastname, email, phone_number, loyalty_points) VALUES (1, 'Florian', 'Huber', 'florian.huber.auditeur@lecnam.net', '0606060606', 0)
-INSERT INTO TABLE_CUSTOMER (id_customer, firstname, lastname, email, phone_number, loyalty_points) VALUES (2, 'Hugo', 'Fuchs', 'hugo.fuchs-haenel.auditeur@lecnam.net', '0606060606', 0)
-INSERT INTO TABLE_CUSTOMER (id_customer, firstname, lastname, email, phone_number, loyalty_points) VALUES (3, 'Anthony', 'Dagon', 'florian.huber.auditeur@lecnam.net', '0606060606', 0)
-INSERT INTO TABLE_CUSTOMER (id_customer, firstname, lastname, email, phone_number, loyalty_points) VALUES (4, 'Aymeric', 'Jannot', 'aymeric.jannot.auditeur@lecnam.net', '0606060606', 0)
-
--- TABLE ADDRESS
-INSERT INTO TABLE_ADDRESS (id_address, address_number, city, country, postal_code, street, id_customer) VALUES (1, '8', 'Schiltigheim', 'France', '67300', 'Rue de Wissembourg', 1)
-INSERT INTO TABLE_ADDRESS (id_address, address_number, city, country, postal_code, street, id_customer) VALUES (2, '3A', 'Lipsheim', 'France', '67250', 'Rue de la Croix', 2)
-INSERT INTO TABLE_ADDRESS (id_address, address_number, city, country, postal_code, street, id_customer) VALUES (3, '2', 'Kogenheim', 'France', '67230', 'Impasse du Hohwald', 3)
-INSERT INTO TABLE_ADDRESS (id_address, address_number, city, country, postal_code, street, id_customer) VALUES (4, '48C', 'Obernai', 'France', '67210', 'Rue de Selestat', 4)
 
 -- TABLE PRODUCT
 INSERT INTO TABLE_PRODUCT (id_product, name, description, price_product, stock) VALUES (1, 'CLAVIER GAMING MÉCANIQUE RVB SANS FIL LIGHTSPEED LOGITECH G915 TKL SANS PAVÉ NUMÉRIQUE', 'Clavier Logitech G915TKL', 229.00, 87)

@@ -13,8 +13,8 @@ public class OrderResponse {
     private Long idOrder;
     private String date;
     private Float priceOrder;
-    private Customer customer;
-    private Address address;
+    private Long idCustomer;
+    private Long idAddress;
     private OrderStatus orderStatus;
 
     //Constructors
@@ -32,8 +32,8 @@ public class OrderResponse {
         this.idOrder = order.getIdOrder();
         this.date = order.getDate();
         this.priceOrder = order.getPriceOrder();
-        this.customer = order.getCustomer();
-        this.address = order.getAddress();
+        this.idCustomer = order.getIdCustomer();
+        this.idAddress = order.getIdAddress();
         this.orderStatus = order.getOrderStatus();
     }
 
@@ -43,14 +43,16 @@ public class OrderResponse {
         this.priceOrder = orderModel.getPriceOrder();
     }
 
-    public OrderResponse(Order order, Customer customer, Address address, OrderStatus orderStatus) {
+    public OrderResponse(Order order, OrderStatus orderStatus) {
         this.idOrder = order.getIdOrder();
         this.date = order.getDate();
         this.priceOrder = order.getPriceOrder();
-        this.customer = customer;
-        this.address = address;
+        this.idCustomer = order.getIdCustomer();
+        this.idAddress = order.getIdAddress();
         this.orderStatus = orderStatus;
     }
+
+
 
     //Getters and Setters
 
@@ -72,13 +74,13 @@ public class OrderResponse {
     public void setPriceOrder(Float priceOrder) {
         this.priceOrder = priceOrder;
     }
-    public Long getIdCustomer() { return customer.getIdCustomer(); }
-    public void setCustomer(Customer customer) { this.customer = customer; }
+    public Long getIdCustomer() { return idCustomer; }
+    public void setIdCustomer(Long idCustomer) { this.idCustomer = idCustomer; }
     public Long getIdAddress() {
-        return address.getIdAddress();
+        return idAddress;
     }
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setIdAddress(Long idAddress) {
+        this.idAddress = idAddress;
     }
     public Long getIdOrderStatus() {
         return orderStatus.getIdOrderStatus();

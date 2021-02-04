@@ -8,8 +8,8 @@ public class OrderToCreate {
 
     private String date;
     private Float priceOrder;
-    private Customer customer;
-    private Address address;
+    private Long idCustomer;
+    private Long idAddress;
     private OrderStatus orderStatus;
 
     public OrderToCreate(String date, Float priceOrder) {
@@ -27,20 +27,20 @@ public class OrderToCreate {
         this.priceOrder = orderRequest.getPriceOrder();
     }
 
-    public OrderToCreate(OrderRequest orderRequest, Customer customer, Address address, OrderStatus orderStatus) {
+    public OrderToCreate(OrderRequest orderRequest, OrderStatus orderStatus) {
         this.date = orderRequest.getDate();
         this.priceOrder = orderRequest.getPriceOrder();
-        this.customer = customer;
-        this.address = address;
+        this.idCustomer = orderRequest.getIdCustomer();
+        this.idAddress = orderRequest.getIdAddress();
         this.orderStatus = orderStatus;
     }
 
-    public OrderToCreate(AddProductToOrderRequest addProductToOrderRequest, Customer customer, Address address, OrderStatus orderStatus)
+    public OrderToCreate(AddProductToOrderRequest addProductToOrderRequest, OrderStatus orderStatus)
     {
         this.date = addProductToOrderRequest.getDate();
         this.priceOrder = addProductToOrderRequest.getPriceOrder();
-        this.customer = customer;
-        this.address = address;
+        this.idCustomer = addProductToOrderRequest.getIdCustomer();
+        this.idAddress = addProductToOrderRequest.getIdAddress();
         this.orderStatus = orderStatus;
     }
 
@@ -56,17 +56,17 @@ public class OrderToCreate {
     public void setPriceOrder(Float priceOrder) {
         this.priceOrder = priceOrder;
     }
-    public Address getAddress() {
-        return address;
+    public Long getIdAddress() {
+        return idAddress;
     }
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setIdAddress(Long idAddress) {
+        this.idAddress = idAddress;
     }
-    public Customer getCustomer() {
-        return customer;
+    public Long getIdCustomer() {
+        return idCustomer;
     }
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setIdCustomer(Long idCustomer) {
+        this.idCustomer = idCustomer;
     }
     public OrderStatus getOrderStatus() {
         return orderStatus;

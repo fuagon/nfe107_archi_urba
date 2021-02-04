@@ -14,8 +14,8 @@ public class Order {
     private Long idOrder;
     private String date;
     private Float priceOrder;
-    private Address address;
-    private Customer customer;
+    private Long idAddress;
+    private Long idCustomer;
     private OrderStatus orderStatus;
     private Set<OrderProductModel> orderProducts;
 
@@ -32,8 +32,8 @@ public class Order {
         this.idOrder = orderModel.getIdOrder();
         this.date = orderModel.getDate();
         this.priceOrder = orderModel.getPriceOrder();
-        this.customer = new Customer(orderModel.getCustomer());
-        this.address = new Address(orderModel.getAddress());
+        this.idCustomer = orderModel.getIdCustomer();
+        this.idAddress = orderModel.getIdAddress();
         this.orderStatus = new OrderStatus(orderModel.getOrderStatus());
         this.orderProducts = orderModel.getOrdersProducts();
     }
@@ -44,30 +44,23 @@ public class Order {
         this.priceOrder = orderRequest.getPriceOrder();
     }
 
-    public Order(OrderRequest orderRequest, Customer customer, Address address, OrderStatus orderStatus) {
+    public Order(OrderRequest orderRequest, OrderStatus orderStatus) {
         this.idOrder = orderRequest.getIdOrder();
         this.date = orderRequest.getDate();
         this.priceOrder = orderRequest.getPriceOrder();
-        this.customer = customer;
-        this.address = address;
+        this.idCustomer = orderRequest.getIdCustomer();
+        this.idAddress = orderRequest.getIdAddress();
         this.orderStatus = orderStatus;
     }
 
-    public Order(OrderModel orderModel, Customer customer, Address address, OrderStatus orderStatus) {
+    public Order(OrderModel orderModel, OrderStatus orderStatus) {
         this.idOrder = orderModel.getIdOrder();
         this.date = orderModel.getDate();
         this.priceOrder = orderModel.getPriceOrder();
-        this.customer = customer;
-        this.address = address;
+        this.idCustomer = orderModel.getIdCustomer();
+        this.idAddress = orderModel.getIdAddress();
         this.orderStatus = orderStatus;
         this.orderProducts = orderModel.getOrdersProducts();
-    }
-
-    public Order(OrderModel orderModel, Customer customer) {
-        this.idOrder = orderModel.getIdOrder();
-        this.date = orderModel.getDate();
-        this.priceOrder = orderModel.getPriceOrder();
-        this.customer = customer;
     }
 
     public Long getIdOrder() {
@@ -88,17 +81,17 @@ public class Order {
     public void setPriceOrder(Float priceOrder) {
         this.priceOrder = priceOrder;
     }
-    public Customer getCustomer() {
-        return customer;
+    public Long getIdCustomer() {
+        return idCustomer;
     }
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setIdCustomer(Long idCustomer) {
+        this.idCustomer = idCustomer;
     }
-    public Address getAddress() {
-        return address;
+    public Long getIdAddress() {
+        return idAddress;
     }
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setIdAddress(Long idAddress) {
+        this.idAddress = idAddress;
     }
     public OrderStatus getOrderStatus() {
         return orderStatus;

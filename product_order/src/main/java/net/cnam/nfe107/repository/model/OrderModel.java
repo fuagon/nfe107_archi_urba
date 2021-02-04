@@ -23,13 +23,11 @@ public class OrderModel {
     @Column(name = "price_order")
     private Float priceOrder;
 
-    @ManyToOne
     @JoinColumn(name = "id_customer")
-    private CustomerModel customer;
+    private Long idCustomer;
 
-    @ManyToOne
     @JoinColumn(name = "id_address")
-    private AddressModel address;
+    private Long idAddress;
 
     @ManyToOne
     @JoinColumn(name = "id_order_status")
@@ -43,13 +41,13 @@ public class OrderModel {
     public OrderModel() {
     }
 
-    public OrderModel(Long idOrder, String date, Float priceOrder, OrderStatusModel orderStatus, CustomerModel customer, AddressModel address, @Nullable Set<OrderProductModel> ordersProducts) {
+    public OrderModel(Long idOrder, String date, Float priceOrder, OrderStatusModel orderStatus, Long idCustomer, Long idAddress, @Nullable Set<OrderProductModel> ordersProducts) {
         this.idOrder = idOrder;
         this.date = date;
         this.priceOrder = priceOrder;
-        this.customer = customer;
+        this.idCustomer = idCustomer;
         this.orderStatus = orderStatus;
-        this.address = address;
+        this.idAddress = idAddress;
         this.ordersProducts = ordersProducts;
     }
 
@@ -58,38 +56,27 @@ public class OrderModel {
         this.idOrder = order.getIdOrder();
         this.date = order.getDate();
         this.priceOrder = order.getPriceOrder();
-        this.customer = new CustomerModel(order.getCustomer());
-        this.address = new AddressModel(order.getAddress());
+        this.idCustomer = order.getIdCustomer();
+        this.idAddress = order.getIdAddress();
         this.orderStatus = new OrderStatusModel(order.getOrderStatus());
     }
+
 
     public OrderModel(OrderToCreate orderToCreate)
     {
         this.date = orderToCreate.getDate();
         this.priceOrder = orderToCreate.getPriceOrder();
+        this.idCustomer = orderToCreate.getIdCustomer();
     }
 
-    public OrderModel(OrderToCreate orderToCreate, CustomerModel customerModel)
+
+
+    public OrderModel(OrderToCreate orderToCreate, OrderStatusModel orderStatusModel)
     {
         this.date = orderToCreate.getDate();
         this.priceOrder = orderToCreate.getPriceOrder();
-        this.customer = customerModel;
-    }
-
-    public OrderModel(Order order, CustomerModel customerModel)
-    {
-        this.idOrder = order.getIdOrder();
-        this.date = order.getDate();
-        this.priceOrder = order.getPriceOrder();
-        this.customer = customerModel;
-    }
-
-    public OrderModel(OrderToCreate orderToCreate, CustomerModel customerModel, AddressModel addressModel, OrderStatusModel orderStatusModel)
-    {
-        this.date = orderToCreate.getDate();
-        this.priceOrder = orderToCreate.getPriceOrder();
-        this.customer = customerModel;
-        this.address = addressModel;
+        this.idCustomer = orderToCreate.getIdCustomer();
+        this.idAddress = orderToCreate.getIdAddress();
         this.orderStatus = orderStatusModel;
     }
 
@@ -111,9 +98,9 @@ public class OrderModel {
     public void setPriceOrder(Float priceOrder) {
         this.priceOrder = priceOrder;
     }
-    public CustomerModel getCustomer() { return this.customer; }
-    public void setCustomer(CustomerModel customer) {
-        this.customer = customer;
+    public Long getIdCustomer() { return this.idCustomer; }
+    public void setIdCustomer(Long idCustomer) {
+        this.idCustomer = idCustomer;
     }
     @Nullable
     public Set<OrderProductModel> getOrdersProducts() {
@@ -128,10 +115,10 @@ public class OrderModel {
     public void setOrderStatus(OrderStatusModel orderStatus) {
         this.orderStatus = orderStatus;
     }
-    public AddressModel getAddress() {
-        return address;
+    public Long getIdAddress() {
+        return idAddress;
     }
-    public void setAddress(AddressModel address) {
-        this.address = address;
+    public void setIdAddress(Long idAddress) {
+        this.idAddress = idAddress;
     }
 }

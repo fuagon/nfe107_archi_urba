@@ -29,19 +29,15 @@ public class OrderService {
 
     public Order getById(Long idOrder) {
         OrderModel orderModelFound = orderRepository.getOne(idOrder);
-        Customer customer = new Customer(orderModelFound.getCustomer());
-        Address address = new Address(orderModelFound.getAddress());
         OrderStatus orderStatus = new OrderStatus(orderModelFound.getOrderStatus());
 
-        return new Order(orderModelFound, customer, address, orderStatus);
+        return new Order(orderModelFound, orderStatus);
     }
 
     public Order create(OrderToCreate orderToCreate)
     {
-        CustomerModel customerModel = new CustomerModel(orderToCreate.getCustomer());
-        AddressModel addressModel = new AddressModel(orderToCreate.getAddress());
         OrderStatusModel orderStatusModel = new OrderStatusModel(orderToCreate.getOrderStatus());
-        OrderModel orderModelToCreate = new OrderModel(orderToCreate, customerModel, addressModel, orderStatusModel);
+        OrderModel orderModelToCreate = new OrderModel(orderToCreate, orderStatusModel);
 
         OrderModel orderModelCreated = orderRepository.save(orderModelToCreate);
 

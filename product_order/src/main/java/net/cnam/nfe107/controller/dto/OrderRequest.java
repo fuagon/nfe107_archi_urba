@@ -35,7 +35,7 @@ public class OrderRequest {
         this.idOrder = order.getIdOrder();
         this.date = order.getDate();
         this.priceOrder = order.getPriceOrder();
-        this.idCustomer = order.getCustomer().getIdCustomer();
+        this.idCustomer = order.getIdCustomer();
     }
 
     public OrderRequest(Order order, Long idCustomer) {

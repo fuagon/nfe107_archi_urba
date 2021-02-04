@@ -22,12 +22,6 @@ public class OrderController {
     OrderService orderService;
 
     @Autowired
-    CustomerService customerService;
-
-    @Autowired
-    AddressService addressService;
-
-    @Autowired
     OrderStatusService orderStatusService;
 
     @GetMapping("/getAllOrders")
@@ -38,10 +32,8 @@ public class OrderController {
         ArrayList<OrderResponse> ordersResponse = new ArrayList<>();
 
         for (OrderModel orderModel:orderFound) {
-            Customer customer = customerService.getById(orderModel.getCustomer().getIdCustomer());
-            Address address = addressService.getById(orderModel.getAddress().getIdAddress());
             OrderStatus orderStatus = orderStatusService.getById(orderModel.getOrderStatus().getIdOrderStatus());
-            OrderResponse order1 = new OrderResponse(new Order(orderModel), customer, address, orderStatus);
+            OrderResponse order1 = new OrderResponse(new Order(orderModel), orderStatus);
 
             ordersResponse.add(order1);
         }
@@ -53,11 +45,9 @@ public class OrderController {
     @ResponseBody
     public ResponseEntity<OrderResponse> getOrder(@PathVariable("id") Long id) {
         Order orderFound = orderService.getById(id);
-        Customer customerFound = customerService.getById(orderFound.getCustomer().getIdCustomer());
-        Address addressFound = addressService.getById(orderFound.getAddress().getIdAddress());
         OrderStatus orderStatusFound = orderStatusService.getById(orderFound.getOrderStatus().getIdOrderStatus());
 
-        OrderResponse orderResponse = new OrderResponse(orderFound, customerFound, addressFound, orderStatusFound);
+        OrderResponse orderResponse = new OrderResponse(orderFound, orderStatusFound);
 
         return new ResponseEntity<>(orderResponse, HttpStatus.OK);
     }
@@ -67,8 +57,6 @@ public class OrderController {
     public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest orderRequest) {
         OrderToCreate orderToCreate = new OrderToCreate(orderRequest);
 
-        orderToCreate.setCustomer(customerService.getById(orderRequest.getIdCustomer()));
-        orderToCreate.setAddress(addressService.getById(orderRequest.getIdAddress()));
         orderToCreate.setOrderStatus(orderStatusService.getById(orderRequest.getIdOrderStatus()));
         Order orderCreated = orderService.create(orderToCreate);
 
@@ -81,10 +69,10 @@ public class OrderController {
     @ResponseBody
     public ResponseEntity<OrderResponse> updateOrder(@RequestBody OrderRequest orderRequest)
     {
-        Customer customerFound = customerService.getById(orderRequest.getIdCustomer());
-        Address addressFound = addressService.getById(orderRequest.getIdAddress());
+
+
         OrderStatus orderStatusFound = orderStatusService.getById(orderRequest.getIdOrderStatus());
-        Order orderToUpdate = new Order(orderRequest, customerFound, addressFound, orderStatusFound);
+        Order orderToUpdate = new Order(orderRequest, orderStatusFound);
 
         Order orderUpdated = orderService.update(orderToUpdate);
 
