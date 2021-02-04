@@ -1,51 +1,26 @@
-package net.cnam.nfe107.repository.model;
+package net.cnam.nfe107.controller.dto;
 
+import net.cnam.nfe107.domain.entity.Address;
 import net.cnam.nfe107.domain.entity.Customer;
-import net.cnam.nfe107.domain.entity.CustomerToCreate;
-import org.hibernate.engine.internal.Cascade;
+import net.cnam.nfe107.domain.entity.Order;
+import net.cnam.nfe107.repository.model.CustomerModel;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-@Entity
-@Table(name="table_customer")
-public class CustomerModel {
+public class CustomerResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_customer")
+    //Attributes
+
     private Long idCustomer;
-
-    @Column(name = "firstname")
     private String firstname;
-
-    @Column(name = "lastname")
     private String lastname;
-
-    @Column(name = "email")
     private String email;
-
-    @Column(name = "phone_number")
     private String phoneNumber;
-
-    @Column(name = "loyalty_points", columnDefinition = "integer default 0")
     private Long loyaltyPoints;
-/*
-    @OneToMany(mappedBy = "customer", targetEntity = AddressModel.class, cascade = CascadeType.ALL)
-    private Set<AddressModel> addresses = new HashSet<>();
 
-    @OneToMany(mappedBy = "customer", targetEntity = OrderModel.class, cascade = CascadeType.ALL)
-    private Set<OrderModel> orders = new HashSet<>();
-    // GET ALLORDER BY IDUSer
-     */
+    //Constructors
 
-    public CustomerModel() {
-    }
-
-    public CustomerModel(Long idCustomer, String firstname, String lastname, String email, String phoneNumber, Long loyaltyPoints) {
+    public CustomerResponse(Long idCustomer, String firstname, String lastname, String email, String phoneNumber, Long loyaltyPoints) {
         this.idCustomer = idCustomer;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -54,7 +29,7 @@ public class CustomerModel {
         this.loyaltyPoints = loyaltyPoints;
     }
 
-    public CustomerModel(Customer customer)
+    public CustomerResponse(Customer customer)
     {
         this.idCustomer = customer.getIdCustomer();
         this.firstname = customer.getFirstname();
@@ -64,14 +39,16 @@ public class CustomerModel {
         this.loyaltyPoints = customer.getLoyaltyPoints();
     }
 
-    public CustomerModel(CustomerToCreate customerToCreate)
-    {
-        this.firstname = customerToCreate.getFirstname();
-        this.lastname = customerToCreate.getLastname();
-        this.email = customerToCreate.getEmail();
-        this.phoneNumber = customerToCreate.getPhoneNumber();
-        this.loyaltyPoints = customerToCreate.getLoyaltyPoints();
+    public CustomerResponse(CustomerModel customerModel) {
+        this.idCustomer = customerModel.getIdCustomer();
+        this.firstname = customerModel.getFirstname();
+        this.lastname = customerModel.getLastname();
+        this.email = customerModel.getEmail();
+        this.phoneNumber = customerModel.getPhoneNumber();
+        this.loyaltyPoints = customerModel.getLoyaltyPoints();
     }
+
+    //Getters and setters
 
     public Long getIdCustomer() {
         return idCustomer;
