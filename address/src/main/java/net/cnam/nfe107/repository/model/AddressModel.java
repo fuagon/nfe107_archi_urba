@@ -29,7 +29,6 @@ public class AddressModel {
     @Column(name = "street")
     private String street;
 
-    @ManyToOne
     @JoinColumn(name = "id_customer")
     private Long idCustomer;
 

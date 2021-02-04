@@ -1,12 +1,9 @@
 package net.cnam.nfe107.controller;
 
-import net.bytebuddy.implementation.bytecode.Throw;
 import net.cnam.nfe107.controller.dto.AddProductToOrderRequest;
-import net.cnam.nfe107.controller.dto.SignUpRequest;
 import net.cnam.nfe107.controller.dto.ToOrderRequest;
 import net.cnam.nfe107.domain.*;
 import net.cnam.nfe107.domain.entity.*;
-import net.cnam.nfe107.repository.model.OrderProductModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;

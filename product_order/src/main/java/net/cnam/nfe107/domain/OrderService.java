@@ -1,12 +1,10 @@
 package net.cnam.nfe107.domain;
 
-import net.cnam.nfe107.controller.CustomerController;
 import net.cnam.nfe107.domain.entity.*;
 import net.cnam.nfe107.domain.entity.Order;
 import net.cnam.nfe107.repository.OrderRepository;
 import net.cnam.nfe107.repository.model.*;
 import net.cnam.nfe107.repository.model.OrderModel;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

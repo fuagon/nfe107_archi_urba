@@ -1,13 +1,10 @@
 package net.cnam.nfe107.repository.model;
 
 import com.sun.istack.Nullable;
-import net.cnam.nfe107.controller.CustomerController;
-import net.cnam.nfe107.domain.entity.Customer;
 import net.cnam.nfe107.domain.entity.Order;
 import net.cnam.nfe107.domain.entity.OrderToCreate;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 

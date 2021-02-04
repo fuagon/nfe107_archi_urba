@@ -1,10 +1,7 @@
 package net.cnam.nfe107.domain;
 
 import net.cnam.nfe107.domain.entity.*;
-import net.cnam.nfe107.repository.OrderRepository;
 import net.cnam.nfe107.repository.OrderStatusRepository;
-import net.cnam.nfe107.repository.model.CustomerModel;
-import net.cnam.nfe107.repository.model.OrderModel;
 import net.cnam.nfe107.repository.model.OrderStatusModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

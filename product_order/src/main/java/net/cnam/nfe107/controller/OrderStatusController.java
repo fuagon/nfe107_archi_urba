@@ -1,14 +1,9 @@
 package net.cnam.nfe107.controller;
 
-import net.cnam.nfe107.controller.dto.OrderRequest;
-import net.cnam.nfe107.controller.dto.OrderResponse;
 import net.cnam.nfe107.controller.dto.OrderStatusRequest;
 import net.cnam.nfe107.controller.dto.OrderStatusResponse;
-import net.cnam.nfe107.domain.CustomerService;
-import net.cnam.nfe107.domain.OrderService;
 import net.cnam.nfe107.domain.OrderStatusService;
 import net.cnam.nfe107.domain.entity.*;
-import net.cnam.nfe107.repository.model.OrderModel;
 import net.cnam.nfe107.repository.model.OrderStatusModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

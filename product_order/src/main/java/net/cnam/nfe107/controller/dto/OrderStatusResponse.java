@@ -1,11 +1,6 @@
 package net.cnam.nfe107.controller.dto;
 
-import net.cnam.nfe107.domain.entity.Address;
-import net.cnam.nfe107.domain.entity.Customer;
-import net.cnam.nfe107.domain.entity.Order;
 import net.cnam.nfe107.domain.entity.OrderStatus;
-import net.cnam.nfe107.repository.OrderStatusRepository;
-import net.cnam.nfe107.repository.model.OrderModel;
 import net.cnam.nfe107.repository.model.OrderStatusModel;
 
 public class OrderStatusResponse {
