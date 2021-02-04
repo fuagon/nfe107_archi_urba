@@ -34,15 +34,7 @@ public class CustomerToCreate {
         this.phoneNumber = customerRequest.getPhoneNumber();
         this.loyaltyPoints = customerRequest.getLoyaltyPoints();
     }
-
-    public CustomerToCreate(SignUpRequest signUpRequest)
-    {
-        this.firstname = signUpRequest.getFirstname();
-        this.lastname = signUpRequest.getLastname();
-        this.email = signUpRequest.getEmail();
-        this.phoneNumber = signUpRequest.getPhoneNumber();
-        this.loyaltyPoints = Long.valueOf(0);
-    }
+    
 
     public String getFirstname() {
         return firstname;
