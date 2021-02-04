@@ -23,6 +23,7 @@ public class UserService {
         customerService.delete(customer.getIdCustomer());
     }
 
+
     /**
      * Ajouter des points de fidélité à un utilisateur
      */

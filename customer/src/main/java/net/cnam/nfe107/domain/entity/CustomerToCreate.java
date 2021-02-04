@@ -1,6 +1,7 @@
 package net.cnam.nfe107.domain.entity;
 
 import net.cnam.nfe107.controller.dto.CustomerRequest;
+import net.cnam.nfe107.controller.dto.SignUpRequest;
 import net.cnam.nfe107.repository.model.CustomerModel;
 
 public class CustomerToCreate {
@@ -19,6 +20,13 @@ public class CustomerToCreate {
         this.loyaltyPoints = loyaltyPoints;
     }
 
+    public CustomerToCreate(SignUpRequest signUpRequest) {
+        this.firstname = signUpRequest.getFirstname();
+        this.lastname = signUpRequest.getLastname();
+        this.email = signUpRequest.getEmail();
+        this.phoneNumber = signUpRequest.getPhoneNumber();
+    }
+
     public CustomerToCreate(CustomerModel customerModel) {
         this.firstname = customerModel.getFirstname();
         this.lastname = customerModel.getLastname();
@@ -34,7 +42,7 @@ public class CustomerToCreate {
         this.phoneNumber = customerRequest.getPhoneNumber();
         this.loyaltyPoints = customerRequest.getLoyaltyPoints();
     }
-    
+
 
     public String getFirstname() {
         return firstname;
