@@ -14,8 +14,7 @@ public class OrchestrationController {
     /**
      *  SIGN UP USER
      *
-     *  - POST CreateUser
-     *  - POST AJOUT DES POINTS DE FIDELITE (100)
+     *  - POST CreateUser + ajout des points de fidélité
      */
 
     /**
@@ -46,6 +45,7 @@ public class OrchestrationController {
     /**
      * CONCLURE LA COMMANDE
      * -POST
+     * -MISE EN LIVRAISON
      */
 
 }

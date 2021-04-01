@@ -7,6 +7,8 @@ import net.cnam.nfe107.repository.model.AddressModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.transaction.Transactional;
 import java.util.*;
 
@@ -34,6 +36,17 @@ public class AddressService {
         return new Address(addressModelFound);
     }
 
+    public Address getByUserId(Long idUser) {
+
+        var address = getAllAddresses();
+        for (Address a:address) {
+            if(a.getIdCustomer() == idUser){
+                return(a);
+            }
+        }
+        return  null;
+    }
+
     public Address create(AddressToCreate addressToCreate)
     {
 
@@ -46,10 +59,14 @@ public class AddressService {
 
     public Address update(Address addressToUpdate)
     {
-
-        AddressModel addressModel = new AddressModel(addressToUpdate);
-
-        AddressModel addressModelUpdated = addressRepository.save(addressModel);
+        var address = addressRepository.getOne(addressToUpdate.getIdAddress());
+        address.setCountry(addressToUpdate.getCountry());
+        address.setCity(addressToUpdate.getCity());
+        address.setPostalCode(addressToUpdate.getPostalCode());
+        address.setAddressNumber(addressToUpdate.getAddressNumber());
+        address.setStreet(addressToUpdate.getStreet());
+        address.setIdCustomer(addressToUpdate.getIdCustomer());
+        AddressModel addressModelUpdated = addressRepository.save(address);
 
         return new Address(addressModelUpdated);
     }

@@ -53,20 +53,16 @@ public class AddressController {
 
         AddressResponse addressResponse = new AddressResponse(addressCreated);
 
-        return new ResponseEntity<>(addressResponse, HttpStatus.OK);
+        return new ResponseEntity<>(addressResponse, HttpStatus.CREATED);
     }
 
     @PutMapping("/update")
     @ResponseBody
     public ResponseEntity<AddressResponse> updateAddress(@RequestBody AddressRequest addressRequest)
     {
-
         Address addressToUpdate = new Address(addressRequest);
-
         Address addressUpdated = addressService.update(addressToUpdate);
-
         AddressResponse addressResponse = new AddressResponse(addressUpdated);
-
         return new ResponseEntity<>(addressResponse, HttpStatus.OK);
     }
 
@@ -77,5 +73,16 @@ public class AddressController {
         addressService.delete(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{id}")
+    @ResponseBody
+    public ResponseEntity<AddressResponse> getAddressByUserID(@PathVariable("id") Long idUser)
+    {
+        var a = addressService.getByUserId(idUser);
+
+        if(a != null)
+            return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 }
