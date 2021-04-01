@@ -19,6 +19,8 @@ public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private UserService userService;
 
     public List<CustomerModel> getAllCustomers() {
         List<CustomerModel> customers;
@@ -46,7 +48,12 @@ public class CustomerService {
     public Customer update(Customer customerToUpdate)
     {
         CustomerModel customerModel = new CustomerModel(customerToUpdate);
-
+        var c = getById(customerModel.getIdCustomer());
+        c.setLoyaltyPoints(customerToUpdate.getLoyaltyPoints());
+        c.setEmail(customerToUpdate.getEmail());
+        c.setFirstname(customerToUpdate.getFirstname());
+        c.setLastname(customerToUpdate.getLastname());
+        c.setPhoneNumber(customerToUpdate.getPhoneNumber());
         CustomerModel customerModelUpdated = customerRepository.save(customerModel);
 
         return new Customer(customerModelUpdated);

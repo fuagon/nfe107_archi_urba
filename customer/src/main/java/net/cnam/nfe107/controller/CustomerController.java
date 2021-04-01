@@ -3,6 +3,7 @@ package net.cnam.nfe107.controller;
 import net.cnam.nfe107.controller.dto.*;
 import net.cnam.nfe107.controller.dto.CustomerResponse;
 import net.cnam.nfe107.domain.CustomerService;
+import net.cnam.nfe107.domain.UserService;
 import net.cnam.nfe107.domain.entity.Customer;
 import net.cnam.nfe107.domain.entity.CustomerToCreate;
 import net.cnam.nfe107.repository.model.CustomerModel;
@@ -17,9 +18,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
-
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    UserService userService;
 
     @GetMapping("/getAllCustomers")
     @ResponseBody
@@ -50,8 +53,9 @@ public class CustomerController {
     @ResponseBody
     public ResponseEntity<CustomerResponse> createCustomer(@RequestBody CustomerRequest customerRequest) {
         CustomerToCreate customerToCreate = new CustomerToCreate(customerRequest);
-
+        customerToCreate.setLoyaltyPoints(Long.valueOf(0));
         Customer customerCreated = customerService.create(customerToCreate);
+
 
         CustomerResponse customerResponse = new CustomerResponse(customerCreated);
 
@@ -60,8 +64,7 @@ public class CustomerController {
 
     @PutMapping("/update")
     @ResponseBody
-    public ResponseEntity<CustomerResponse> updateCustomer(@RequestBody CustomerRequest customerRequest)
-    {
+    public ResponseEntity<CustomerResponse> updateCustomer(@RequestBody CustomerRequest customerRequest) {
         Customer customerToUpdate = new Customer(customerRequest);
 
         Customer customerUpdated = customerService.update(customerToUpdate);
@@ -73,10 +76,27 @@ public class CustomerController {
 
     @DeleteMapping("/delete/{id}")
     @ResponseBody
-    public ResponseEntity<CustomerResponse> deleteCustomer(@PathVariable("id") Long id)
-    {
+    public ResponseEntity<CustomerResponse> deleteCustomer(@PathVariable("id") Long id) {
         customerService.delete(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/loyaltyP/add")
+    @ResponseBody
+    public ResponseEntity<CustomerResponse> addLoyaltyPoint(@RequestBody LoyaltyPointRequest request) {
+        userService.addLoyaltyPoints(request.idUser, request.nbPoint);
+
+        var u = customerService.getById(request.idUser);
+        return new ResponseEntity<>(new CustomerResponse(u), HttpStatus.OK);
+    }
+
+    @PostMapping("/loyaltyP/remove")
+    @ResponseBody
+    public ResponseEntity<CustomerResponse> removeLoyaltyPoint(@RequestBody LoyaltyPointRequest request) {
+        userService.removeLoyaltyPoints(request.idUser, request.nbPoint);
+
+        var u = customerService.getById(request.idUser);
+        return new ResponseEntity<>(new CustomerResponse(u), HttpStatus.OK);
     }
 }

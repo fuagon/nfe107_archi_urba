@@ -77,7 +77,7 @@ public class AddressController {
 
     @GetMapping("/user/{id}")
     @ResponseBody
-    public ResponseEntity<AddressResponse> getAddressByUserID(@PathVariable("id") Long idUser)
+    public ResponseEntity<ArrayList<AddressResponse>> getAddressByUserID(@PathVariable("id") Long idUser)
     {
         var a = addressService.getByUserId(idUser);
 

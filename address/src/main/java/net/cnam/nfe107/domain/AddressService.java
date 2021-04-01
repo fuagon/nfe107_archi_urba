@@ -36,15 +36,16 @@ public class AddressService {
         return new Address(addressModelFound);
     }
 
-    public Address getByUserId(Long idUser) {
+    public List<Address> getByUserId(Long idUser) {
 
-        var address = getAllAddresses();
-        for (Address a:address) {
+        var addresses = getAllAddresses();
+        var adressesUser = new ArrayList<Address>();
+        for (Address a:addresses) {
             if(a.getIdCustomer() == idUser){
-                return(a);
+                adressesUser.add(a);
             }
         }
-        return  null;
+        return adressesUser;
     }
 
     public Address create(AddressToCreate addressToCreate)

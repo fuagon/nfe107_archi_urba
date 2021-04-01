@@ -10,8 +10,6 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class UserService {
-
-
     @Autowired
     CustomerService customerService;
 
@@ -22,7 +20,6 @@ public class UserService {
     {
         customerService.delete(customer.getIdCustomer());
     }
-
 
     /**
      * Ajouter des points de fidélité à un utilisateur
@@ -35,7 +32,6 @@ public class UserService {
         customerService.update(customer);
     }
 
-
     /**
      * Retirer des points de fidélité à un utilisateur
      */
@@ -45,8 +41,9 @@ public class UserService {
         if (customer.getLoyaltyPoints() >= loyaltyPoints)
         {
             customer.setLoyaltyPoints(customer.getLoyaltyPoints() - loyaltyPoints);
+        }else {
+            customer.setLoyaltyPoints(Long.valueOf(0));
         }
-
         customerService.update(customer);
     }
 }
