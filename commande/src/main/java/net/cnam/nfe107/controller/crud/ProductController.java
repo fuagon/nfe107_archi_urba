@@ -1,7 +1,7 @@
 package net.cnam.nfe107.controller.crud;
 
-import net.cnam.nfe107.controller.dto.ProductRequest;
-import net.cnam.nfe107.controller.dto.ProductResponse;
+import net.cnam.nfe107.controller.dto.crud.ProductRequest;
+import net.cnam.nfe107.controller.dto.crud.ProductResponse;
 import net.cnam.nfe107.domain.entity.crud.ProductService;
 import net.cnam.nfe107.domain.entity.Product;
 import net.cnam.nfe107.domain.entity.ProductToCreate;

@@ -1,14 +1,14 @@
-package net.cnam.nfe107.controller.dto;
+package net.cnam.nfe107.controller.dto.crud;
 
-public class ToOrderRequest {
+public class ToOrderResponse {
 
     private Long idOrder;
     private Long loyaltyPoints;
 
-    public ToOrderRequest() {
+    public ToOrderResponse() {
     }
 
-    public ToOrderRequest(Long idOrder, Long loyaltyPoints) {
+    public ToOrderResponse(Long idOrder, Long loyaltyPoints) {
         this.idOrder = idOrder;
         this.loyaltyPoints = loyaltyPoints;
     }

@@ -1,12 +1,9 @@
 package net.cnam.nfe107.domain.entity;
 
-import com.sun.istack.Nullable;
-import net.cnam.nfe107.controller.dto.OrderRequest;
+import net.cnam.nfe107.controller.dto.crud.OrderRequest;
 import net.cnam.nfe107.repository.model.OrderModel;
 import net.cnam.nfe107.repository.model.OrderProductModel;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class Order {

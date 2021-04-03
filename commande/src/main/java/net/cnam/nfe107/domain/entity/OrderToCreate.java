@@ -1,7 +1,7 @@
 package net.cnam.nfe107.domain.entity;
 
-import net.cnam.nfe107.controller.dto.AddProductToOrderRequest;
-import net.cnam.nfe107.controller.dto.OrderRequest;
+import net.cnam.nfe107.controller.dto.crud.AddProductToOrderRequest;
+import net.cnam.nfe107.controller.dto.crud.OrderRequest;
 import net.cnam.nfe107.repository.model.OrderModel;
 
 public class OrderToCreate {
@@ -12,9 +12,12 @@ public class OrderToCreate {
     private Long idAddress;
     private OrderStatus orderStatus;
 
-    public OrderToCreate(String date, Float priceOrder) {
+    public OrderToCreate(String date, Long idCustomer, Long idAddress, OrderStatus orderStatus) {
         this.date = date;
-        this.priceOrder = priceOrder;
+        this.priceOrder = 0f;
+        this.idCustomer = idCustomer;
+        this.idAddress = idAddress;
+        this.orderStatus = orderStatus;
     }
 
     public OrderToCreate(OrderModel orderModel) {

@@ -1,31 +1,34 @@
-package net.cnam.nfe107.controller.dto;
+package net.cnam.nfe107.controller.dto.crud;
 
 import net.cnam.nfe107.domain.entity.Order;
 import net.cnam.nfe107.domain.entity.OrderProduct;
 import net.cnam.nfe107.domain.entity.Product;
 
-public class OrderProductResponseWithoutIdOrder {
+public class OrderProductResponse {
 
     private Order order;
     private Product product;
     private Long quantity;
 
-    public OrderProductResponseWithoutIdOrder() {
+    public OrderProductResponse() {
     }
 
-    public OrderProductResponseWithoutIdOrder(Order order, Product product, Long quantity) {
+    public OrderProductResponse(Order order, Product product, Long quantity) {
         this.order = order;
         this.product = product;
         this.quantity = quantity;
     }
 
-    public OrderProductResponseWithoutIdOrder(OrderProduct orderProduct)
+    public OrderProductResponse(OrderProduct orderProduct)
     {
         this.order = orderProduct.getOrder();
         this.product = orderProduct.getProduct();
         this.quantity = orderProduct.getQuantity();
     }
 
+    public Long getIdOrder() {
+        return order.getIdOrder();
+    }
     public void setOrder(Order Order) {
         this.order = order;
     }

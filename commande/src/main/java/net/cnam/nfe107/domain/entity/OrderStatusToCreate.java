@@ -1,7 +1,6 @@
 package net.cnam.nfe107.domain.entity;
 
-import net.cnam.nfe107.controller.dto.OrderRequest;
-import net.cnam.nfe107.controller.dto.OrderStatusRequest;
+import net.cnam.nfe107.controller.dto.crud.OrderStatusRequest;
 
 public class OrderStatusToCreate {
 

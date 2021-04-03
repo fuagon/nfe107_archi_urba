@@ -1,7 +1,7 @@
 package net.cnam.nfe107.controller.crud;
 
-import net.cnam.nfe107.controller.dto.OrderStatusRequest;
-import net.cnam.nfe107.controller.dto.OrderStatusResponse;
+import net.cnam.nfe107.controller.dto.crud.OrderStatusRequest;
+import net.cnam.nfe107.controller.dto.crud.OrderStatusResponse;
 import net.cnam.nfe107.domain.entity.crud.OrderStatusService;
 import net.cnam.nfe107.domain.entity.*;
 import net.cnam.nfe107.repository.model.OrderStatusModel;

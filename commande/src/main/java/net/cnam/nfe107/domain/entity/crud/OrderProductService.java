@@ -32,6 +32,13 @@ public class OrderProductService {
         return new OrderProduct(orderProductModelFound);
     }
 
+    public OrderProduct getById(Long idOrder) {
+        OrderProductIdModel orderProductIdModel = new OrderProductIdModel(idOrder, null);
+        OrderProductModel orderProductModelFound = orderProductRepository.getOne(orderProductIdModel);
+
+        return new OrderProduct(orderProductModelFound);
+    }
+
     public OrderProduct create(Order order, Product product, Long quantity)
     {
         OrderModel orderModel = new OrderModel(order);

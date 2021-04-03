@@ -19,12 +19,11 @@ public class ProductServiceUnit {
      * @param idProduct
      * @param stock
      */
-    public boolean addStock(Long idProduct, Long stock) {
+    public void addStock(Long idProduct, Long stock) {
         Product product = productService.getById(idProduct);
         product.setStock(product.getStock() + stock);
 
         productService.update(product);
-        return true;
     }
 
     /**
@@ -32,13 +31,19 @@ public class ProductServiceUnit {
      * @param idProduct
      * @param quantite
      */
-    public boolean removeStock(Long idProduct, Long quantite) {
+    public void removeStock(Long idProduct, Long quantite) {
         Product product = productService.getById(idProduct);
 
         // On test si c'est possible de retier la quantité demandé
-        if(!(product.getStock() - quantite < 0)){
+        if(checkSufficientQuantity(idProduct, quantite)){
             product.setStock(product.getStock() - quantite);
             productService.update(product);
+        }
+    }
+
+    public boolean checkSufficientQuantity(Long idProduct, Long quantity){
+        var p = productService.getById(idProduct);
+        if(!(p.getStock() - quantity < 0)){
             return true;
         }
         return false;

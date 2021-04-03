@@ -1,13 +1,16 @@
 package net.cnam.nfe107.domain.entity.crud;
 
+import net.cnam.nfe107.domain.OrderProductServiceUnit;
 import net.cnam.nfe107.domain.entity.*;
 import net.cnam.nfe107.domain.entity.Order;
 import net.cnam.nfe107.repository.OrderRepository;
 import net.cnam.nfe107.repository.model.*;
 import net.cnam.nfe107.repository.model.OrderModel;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +22,9 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private OrderProductServiceUnit productServiceUnit;
+
     public List<OrderModel> getAllOrders() {
         List<OrderModel> orders;
 
@@ -27,11 +33,25 @@ public class OrderService {
         return orders;
     }
 
-    public Order getById(Long idOrder) {
-        OrderModel orderModelFound = orderRepository.getOne(idOrder);
-        OrderStatus orderStatus = new OrderStatus(orderModelFound.getOrderStatus());
+    public Order getById(Long idOrder) throws EntityNotFoundException {
+        OrderModel orderModelFound;
 
-        return new Order(orderModelFound, orderStatus);
+        orderModelFound = orderRepository.getOne(idOrder);
+
+
+        //OrderStatus orderStatus = new OrderStatus(orderModelFound.getOrderStatus());
+
+        if(orderModelFound.getIdOrder() != null){
+
+
+            var o =new Order(orderModelFound);
+            var list = productServiceUnit.getProductsOrder(idOrder);
+            o.setOrderProducts(list);
+            return o;
+        }else{
+            return null;
+        }
+
     }
 
     public Order create(OrderToCreate orderToCreate)
@@ -58,9 +78,10 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
 
-    public Set<OrderProductModel> getOrdersProduct(Order order)
+    public Set<OrderProductModel> getOrdersProduct(Long idOrder)
     {
-        OrderModel orderModel = new OrderModel(order);
+        var u = orderRepository.getOne(idOrder);
+        OrderModel orderModel = u;
         return orderModel.getOrdersProducts();
     }
 }

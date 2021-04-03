@@ -1,6 +1,14 @@
-package net.cnam.nfe107.controller.dto;
+package net.cnam.nfe107.controller.dto.crud;
 
-public class AddProductToOrderRequest {
+import net.cnam.nfe107.domain.entity.Order;
+import net.cnam.nfe107.domain.entity.Product;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class OrderRequest {
+
+    //Attributes
 
     private Long idOrder;
     private String date;
@@ -8,22 +16,36 @@ public class AddProductToOrderRequest {
     private Long idCustomer;
     private Long idAddress;
     private Long idOrderStatus;
-    private Long idProduct;
-    private Long quantity;
 
-    public AddProductToOrderRequest() {
+    //Constructors
+
+    public OrderRequest() {
     }
 
-    public AddProductToOrderRequest(Long idOrder, String date, Float priceOrder, Long idCustomer, Long idAddress, Long idOrderStatus, Long idProduct, Long quantity) {
+    public OrderRequest(Long idOrder, String date, Float priceOrder, Long idCustomer, Long idAddress, Long idOrderStatus) {
         this.idOrder = idOrder;
         this.date = date;
         this.priceOrder = priceOrder;
         this.idCustomer = idCustomer;
         this.idAddress = idAddress;
         this.idOrderStatus = idOrderStatus;
-        this.idProduct = idProduct;
-        this.quantity = quantity;
     }
+
+    public OrderRequest(Order order) {
+        this.idOrder = order.getIdOrder();
+        this.date = order.getDate();
+        this.priceOrder = order.getPriceOrder();
+        this.idCustomer = order.getIdCustomer();
+    }
+
+    public OrderRequest(Order order, Long idCustomer) {
+        this.idOrder = order.getIdOrder();
+        this.date = order.getDate();
+        this.priceOrder = order.getPriceOrder();
+        this.idCustomer = idCustomer;
+    }
+
+    //Getters and Setters
 
     public Long getIdOrder() {
         return idOrder;
@@ -60,17 +82,5 @@ public class AddProductToOrderRequest {
     }
     public void setIdOrderStatus(Long idOrderStatus) {
         this.idOrderStatus = idOrderStatus;
-    }
-    public Long getIdProduct() {
-        return idProduct;
-    }
-    public void setIdProduct(Long idProduct) {
-        this.idProduct = idProduct;
-    }
-    public Long getQuantity() {
-        return quantity;
-    }
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
     }
 }

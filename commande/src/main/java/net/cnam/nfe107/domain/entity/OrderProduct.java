@@ -1,7 +1,5 @@
 package net.cnam.nfe107.domain.entity;
 
-import net.cnam.nfe107.controller.dto.OrderProductRequest;
-import net.cnam.nfe107.controller.dto.OrderRequest;
 import net.cnam.nfe107.repository.model.OrderProductModel;
 
 public class OrderProduct {

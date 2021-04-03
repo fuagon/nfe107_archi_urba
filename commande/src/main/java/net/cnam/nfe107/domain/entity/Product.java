@@ -1,10 +1,7 @@
 package net.cnam.nfe107.domain.entity;
 
-import net.cnam.nfe107.controller.dto.ProductRequest;
+import net.cnam.nfe107.controller.dto.crud.ProductRequest;
 import net.cnam.nfe107.repository.model.ProductModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Product {
 

@@ -1,4 +1,4 @@
-package net.cnam.nfe107.controller.dto;
+package net.cnam.nfe107.controller.dto.crud;
 
 import java.util.ArrayList;
 
