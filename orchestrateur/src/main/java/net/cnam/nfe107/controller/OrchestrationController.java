@@ -6,11 +6,9 @@ package net.cnam.nfe107.controller;
  * @author Ohtnaoh - AD
  */
 
-import net.cnam.nfe107.controller.dto.CreerCommandeRequest;
-import net.cnam.nfe107.controller.dto.CreerCommandeResponse;
-import net.cnam.nfe107.controller.dto.CreerUtilisateurRequest;
-import net.cnam.nfe107.controller.dto.CreerUtilisateurResponse;
+import net.cnam.nfe107.controller.dto.*;
 import net.cnam.nfe107.domain.ShopService;
+import net.cnam.nfe107.domain.dto.AddProductCommande;
 import net.cnam.nfe107.domain.dto.CreateAddressRequest;
 import net.cnam.nfe107.domain.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,19 +89,69 @@ public class OrchestrationController {
         CreerCommandeResponse resultatCreationCommande = shopService.creerCommande(commandeACreer);
 
 
-        // Etape 4 : On constitue et envoie notre réponse HTTP
+        // Etape 3 : On constitue et envoie notre réponse HTTP
         return new ResponseEntity<>(resultatCreationCommande, HttpStatus.OK);
     }
 
-    /**
-     * AJOUTER UN PRODUIT A LA COMMANDE
-     * - POST
-     */
 
-    /**
-     * CONCLURE LA COMMANDE
-     * -POST
-     * -MISE EN LIVRAISON
-     */
+    @PostMapping("/ajouterProduitCommande")
+    @ResponseBody
+    public ResponseEntity<CreerCommandeResponse> addProducts(@RequestBody AjouterProduitCommande commandeRequest){
+
+        // Etape 1 : On convertit notre contrat de service de type Request vers notre objet métier.
+        AddProductCommande addProductCommande = new AddProductCommande(commandeRequest.getIdOrder(),
+                commandeRequest.getIdProduct(), commandeRequest.getQuantity());
+
+        // Etape 2 : On appelle notre service d'orchestration métier
+        // créer utilisateur
+        CreerCommandeResponse resultatCreationCommande = shopService.ajouterProduitsCommande(addProductCommande);
+
+
+        // Etape 3 : On constitue et envoie notre réponse HTTP
+        return new ResponseEntity<>(resultatCreationCommande, HttpStatus.OK);
+    }
+
+    @PostMapping("/supprimerProduitCommande")
+    @ResponseBody
+    public ResponseEntity<CreerCommandeResponse> delProducts(@RequestBody AjouterProduitCommande ajouterProduitCommande){
+
+        // Etape 1 : On convertit notre contrat de service de type Request vers notre objet métier.
+        AddProductCommande addProductCommande = new AddProductCommande(ajouterProduitCommande.getIdOrder(),
+                ajouterProduitCommande.getIdProduct(), ajouterProduitCommande.getQuantity());
+
+        // Etape 2 : On appelle notre service d'orchestration métier
+        // créer utilisateur
+        CreerCommandeResponse resultatCreationCommande = shopService.supprimerProduitsCommande(addProductCommande);
+
+
+        // Etape 3 : On constitue et envoie notre réponse HTTP
+        return new ResponseEntity<>(resultatCreationCommande, HttpStatus.OK);
+    }
+
+
+
+
+    @PostMapping("/validateCommande")
+    @ResponseBody
+    public ResponseEntity<ValidateCommandeResponse> validateCommande(@RequestBody ValidateCommandeRequest commandeRequest){
+
+        // Etape 1 : On convertit notre contrat de service de type Request vers notre objet métier.
+        CommandeAValider commandeAValider = new CommandeAValider(
+                commandeRequest.getIdOrder(),
+                commandeRequest.getFidelityPointUsed(),
+                commandeRequest.getCardNumber(),
+                commandeRequest.getCardName(),
+                commandeRequest.getCvc2()
+        );
+
+        if(shopService.paiment(commandeAValider)){
+            ValidateCommandeResponse resultatCreationCommande = shopService.validateCommande(commandeAValider);
+            shopService.livrer(commandeAValider);
+            return new ResponseEntity<>(resultatCreationCommande, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
+
+    }
 
 }

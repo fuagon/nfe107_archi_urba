@@ -90,6 +90,8 @@ public class MainController {
             }
             if (existP){
                 orderProductServiceUnit.increaseQuantity(addProductCommandRequest.getIdOrder(), addProductCommandRequest.getIdProduct(), addProductCommandRequest.getQuantity());
+            }else{
+                orderProductService.create(order, productService.getById(addProductCommandRequest.getIdProduct()), addProductCommandRequest.getQuantity());
             }
 
             return new ResponseEntity<>(new OrderCompleteResponse(orderService.getById(order.getIdOrder())), HttpStatus.OK);

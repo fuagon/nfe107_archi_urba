@@ -1,6 +1,8 @@
 package net.cnam.nfe107.domain;
 
 import net.cnam.nfe107.controller.dto.CreerCommandeResponse;
+import net.cnam.nfe107.controller.dto.ValidateCommandeResponse;
+import net.cnam.nfe107.domain.dto.AddProductCommande;
 import net.cnam.nfe107.domain.dto.CreateAddressRequest;
 import net.cnam.nfe107.domain.dto.CreateCommandeRequest;
 import net.cnam.nfe107.domain.dto.CreateCustomerRequest;
@@ -24,7 +26,9 @@ public class ShopService {
     private final static String listAddressUtilisateur = "http://localhost:8081/api/address/user/";
 
     private final static String commandeACreerurl = "http://localhost:8083/api/commande/creer";
-    private final static String getCommandeId = "http://localhost:8083/api/commande/";
+    private final static String commandeAjouterProduit = "http://localhost:8083/api/commande/ajouterProduitCommande";
+    private final static String commandeSupprimerProduit = "http://localhost:8083/api/commande/supprimerProduitCommande";
+    private final static String validerCommande = "http://localhost:8083/api/commande/validerCommande";
 
 
     public ResultatCreationUtilisateur creerUnUtilisateur(UtilisateurACreer userAddress){
@@ -94,11 +98,41 @@ public class ShopService {
         return resultatCreationCommande;
     }
 
-    public CreerCommandeResponse getCommande(Long idCommande) {
-
+    public CreerCommandeResponse ajouterProduitsCommande(AddProductCommande addProductCommandeRequest) {
+        // Créer utilisateur
         RestTemplate restTemplate = new RestTemplate();
-        String url = getCommandeId + idCommande.toString();
-        CreerCommandeResponse res = restTemplate.getForObject(url, CreerCommandeResponse.class);
-        return  res;
+        HttpEntity<AddProductCommande> addProductCommandeRequestHttpEntity = new HttpEntity<>(addProductCommandeRequest);
+
+        CreerCommandeResponse resultatCreationCommande = restTemplate.postForObject(commandeAjouterProduit, addProductCommandeRequestHttpEntity, CreerCommandeResponse.class);
+
+        return resultatCreationCommande;
+    }
+
+    public CreerCommandeResponse supprimerProduitsCommande(AddProductCommande addProductCommande) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<AddProductCommande> addProductCommandeRequestHttpEntity = new HttpEntity<>(addProductCommande);
+
+        CreerCommandeResponse resultatCreationCommande = restTemplate.postForObject(commandeSupprimerProduit, addProductCommandeRequestHttpEntity, CreerCommandeResponse.class);
+
+        return resultatCreationCommande;
+    }
+
+    public ValidateCommandeResponse validateCommande(CommandeAValider commandeAValider) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<CommandeAValider> createCustomerRequestHttpEntity = new HttpEntity<>(commandeAValider);
+
+        ValidateCommandeResponse resultatCreationCommande = restTemplate.postForObject(validerCommande, createCustomerRequestHttpEntity, ValidateCommandeResponse.class);
+
+        return resultatCreationCommande;
+    }
+
+    public boolean paiment(CommandeAValider commandeAValider) {
+
+        // SIMULER UN PAIEMENT
+        return true;
+    }
+
+    public void livrer(CommandeAValider commandeAValider) {
+        // Simule la mise en livraison
     }
 }
