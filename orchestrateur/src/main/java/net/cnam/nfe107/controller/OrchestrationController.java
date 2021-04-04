@@ -6,12 +6,13 @@ package net.cnam.nfe107.controller;
  * @author Ohtnaoh - AD
  */
 
+import net.cnam.nfe107.controller.dto.CreerCommandeRequest;
+import net.cnam.nfe107.controller.dto.CreerCommandeResponse;
 import net.cnam.nfe107.controller.dto.CreerUtilisateurRequest;
 import net.cnam.nfe107.controller.dto.CreerUtilisateurResponse;
 import net.cnam.nfe107.domain.ShopService;
-import net.cnam.nfe107.domain.entity.ResultatCreationAddress;
-import net.cnam.nfe107.domain.entity.ResultatCreationUtilisateur;
-import net.cnam.nfe107.domain.entity.UtilisateurACreer;
+import net.cnam.nfe107.domain.dto.CreateAddressRequest;
+import net.cnam.nfe107.domain.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,25 +54,46 @@ public class OrchestrationController {
         return new ResponseEntity<>(creerUtilisateurResponse, HttpStatus.OK);
     }
 
-    /**
-     * RGPD DELETE USER
-     * - POST DeleteUser
-     */
+    @DeleteMapping("/supprimerUtilisateurRGPD/{id}")
+    @ResponseBody
+    public ResponseEntity<?> deleteUserRGPD(@PathVariable("id") Long idUtilsateur){
 
 
-                    // ADDRESS
-    /**
-     * AJOUT/SUPP D'UNE ADRESSE DE LIVRAISON
-     * - POST AddAdress
-     */
+        var a = shopService.recupererAdressesUtilisateur(idUtilsateur);
+        for (var o: a) {
+            shopService.deleteAddress(o.idAddress);
+        }
+        shopService.deleteCustomer(idUtilsateur);
 
-                    // COMMANDE et PRODUCT
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/ajoutAddress")
+    @ResponseBody
+    public ResponseEntity<ResultatCreationAddress> ajoutAdress(@RequestBody CreateAddressRequest addressRequest){
+
+    var res = shopService.creerUneAddress(addressRequest.getIdCustomer(), new UtilisateurACreer("","", "",
+            "", null, addressRequest.getCountry(), addressRequest.getCity(),
+            addressRequest.getPostalCode(), addressRequest.getAddressNumber(), addressRequest.getStreet()));
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @PostMapping("/creerCommande")
+    @ResponseBody
+    public ResponseEntity<CreerCommandeResponse> creerCommande(@RequestBody CreerCommandeRequest commandeRequest){
+
+        // Etape 1 : On convertit notre contrat de service de type Request vers notre objet métier.
+        CommandeACreer commandeACreer = new CommandeACreer(commandeRequest.getDate(), commandeRequest.getIdCustomer(),
+                commandeRequest.getIdAddress(), commandeRequest.getIdProduct(), commandeRequest.getQuantite());
+
+        // Etape 2 : On appelle notre service d'orchestration métier
+        // créer utilisateur
+        CreerCommandeResponse resultatCreationCommande = shopService.creerCommande(commandeACreer);
 
 
-    /**
-     *  CREER UNE COMMANDE
-     *  - POST
-     */
+        // Etape 4 : On constitue et envoie notre réponse HTTP
+        return new ResponseEntity<>(resultatCreationCommande, HttpStatus.OK);
+    }
 
     /**
      * AJOUTER UN PRODUIT A LA COMMANDE

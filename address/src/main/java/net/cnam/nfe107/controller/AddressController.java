@@ -78,12 +78,12 @@ public class AddressController {
 
     @GetMapping("/user/{id}")
     @ResponseBody
-    public ResponseEntity<ArrayList<AddressResponse>> getAddressByUserID(@PathVariable("id") Long idUser)
+    public ResponseEntity<List<Address>> getAddressByUserID(@PathVariable("id") Long idUser)
     {
-        var a = addressService.getByUserId(idUser);
+        List<Address> aList = addressService.getByUserId(idUser);
 
-        if(a != null)
-            return new ResponseEntity<>(HttpStatus.OK);
+        if(aList != null)
+            return new ResponseEntity<>(aList, HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 }
