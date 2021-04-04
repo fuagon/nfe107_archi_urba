@@ -53,7 +53,7 @@ public class CustomerController {
     @ResponseBody
     public ResponseEntity<CustomerResponse> createCustomer(@RequestBody CustomerRequest customerRequest) {
         CustomerToCreate customerToCreate = new CustomerToCreate(customerRequest);
-        customerToCreate.setLoyaltyPoints(Long.valueOf(0));
+        customerToCreate.setLoyaltyPoints(Long.valueOf(100));
         Customer customerCreated = customerService.create(customerToCreate);
 
 

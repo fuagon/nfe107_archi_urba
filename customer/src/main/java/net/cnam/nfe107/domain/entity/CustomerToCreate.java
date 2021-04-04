@@ -1,5 +1,6 @@
 package net.cnam.nfe107.domain.entity;
 
+
 import net.cnam.nfe107.controller.dto.CustomerRequest;
 import net.cnam.nfe107.controller.dto.SignUpRequest;
 import net.cnam.nfe107.repository.model.CustomerModel;
