@@ -1,17 +1,10 @@
 package net.cnam.nfe107.domain.dto;
 
 public class CreateCustomerRequest {
-
-
     private String firstname;
     private String lastname;
     private String email;
     private String phoneNumber;
-
-    //Constructors
-
-    public CreateCustomerRequest() {
-    }
 
     public CreateCustomerRequest(String firstname, String lastname, String email, String phoneNumber) {
         this.firstname = firstname;
@@ -19,9 +12,6 @@ public class CreateCustomerRequest {
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
-
-
-    //Getters and Setters
 
     public String getFirstname() {
         return firstname;

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ResultatCreationUtilisateur {
-    //Attributes
-
     public Long idCustomer;
     public String firstname;
     public String lastname;

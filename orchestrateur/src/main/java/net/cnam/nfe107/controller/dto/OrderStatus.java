@@ -7,13 +7,11 @@ public class OrderStatus {
     private Long idOrderStatus;
     private String description;
 
-
     @JsonCreator
     public OrderStatus(@JsonProperty("idOrderStatus") Long idOrderStatus, @JsonProperty("description") String description) {
         this.idOrderStatus = idOrderStatus;
         this.description = description;
     }
-
 
     public Long getIdOrderStatus() {
         return idOrderStatus;

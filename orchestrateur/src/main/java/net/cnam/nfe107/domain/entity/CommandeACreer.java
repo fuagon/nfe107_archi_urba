@@ -18,39 +18,30 @@ public class CommandeACreer {
     public String getDate() {
         return date;
     }
-
     public void setDate(String date) {
         this.date = date;
     }
-
     public Long getIdCustomer() {
         return idCustomer;
     }
-
     public void setIdCustomer(Long idCustomer) {
         this.idCustomer = idCustomer;
     }
-
     public Long getIdAddress() {
         return idAddress;
     }
-
     public void setIdAddress(Long idAddress) {
         this.idAddress = idAddress;
     }
-
     public Long getIdProduct() {
         return idProduct;
     }
-
     public void setIdProduct(Long idProduct) {
         this.idProduct = idProduct;
     }
-
     public Long getQuantity() {
         return quantity;
     }
-
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }

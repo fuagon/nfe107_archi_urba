@@ -14,23 +14,18 @@ public class AddProductCommande {
     public Long getIdOrder() {
         return idOrder;
     }
-
     public void setIdOrder(Long idOrder) {
         this.idOrder = idOrder;
     }
-
     public Long getIdProduct() {
         return idProduct;
     }
-
     public void setIdProduct(Long idProduct) {
         this.idProduct = idProduct;
     }
-
     public Long getQuantity() {
         return quantity;
     }
-
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }

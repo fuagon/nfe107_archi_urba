@@ -28,7 +28,7 @@ public class OrchestrationController {
     @ResponseBody
     public ResponseEntity<CreerUtilisateurResponse> creerUnUtilisateurEtSonAdresse(@RequestBody CreerUtilisateurRequest creerUtilisateurRequest) {
 
-        // Etape 1 : On convertit notre contrat de service de type Request vers notre objet métier.
+        // On convertit notre contrat de service de type Request vers notre objet métier.
         UtilisateurACreer utilisateurACreer = new UtilisateurACreer(creerUtilisateurRequest.getFirstname(),
                 creerUtilisateurRequest.getLastname(),creerUtilisateurRequest.getEmail(),
                 creerUtilisateurRequest.getPhoneNumber(), Long.valueOf(100), creerUtilisateurRequest.getCountry(),
@@ -36,9 +36,9 @@ public class OrchestrationController {
                 creerUtilisateurRequest.getAddressNumber(), creerUtilisateurRequest.getStreet());
 
         // Etape 2 : On appelle notre service d'orchestration métier
-            // créer utilisateur
+        // créer utilisateur
         ResultatCreationUtilisateur resultatCreationUtilisateur = shopService.creerUnUtilisateur(utilisateurACreer);
-            // créer address
+        // créer address
         ResultatCreationAddress resultatCreationAddress = shopService.creerUneAddress(resultatCreationUtilisateur.idCustomer, utilisateurACreer);
 
 
@@ -56,11 +56,13 @@ public class OrchestrationController {
     @ResponseBody
     public ResponseEntity<?> deleteUserRGPD(@PathVariable("id") Long idUtilsateur){
 
-
+        // On récupère la totalité des addres de l'utilisateur
         var a = shopService.recupererAdressesUtilisateur(idUtilsateur);
         for (var o: a) {
+            // On les supprime tous
             shopService.deleteAddress(o.idAddress);
         }
+        // On fini en supprimant l'utilsateur egalement
         shopService.deleteCustomer(idUtilsateur);
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -70,9 +72,11 @@ public class OrchestrationController {
     @ResponseBody
     public ResponseEntity<ResultatCreationAddress> ajoutAdress(@RequestBody CreateAddressRequest addressRequest){
 
-    var res = shopService.creerUneAddress(addressRequest.getIdCustomer(), new UtilisateurACreer("","", "",
+        // Creation de l'adresse
+        var res = shopService.creerUneAddress(addressRequest.getIdCustomer(), new UtilisateurACreer("","", "",
             "", null, addressRequest.getCountry(), addressRequest.getCity(),
             addressRequest.getPostalCode(), addressRequest.getAddressNumber(), addressRequest.getStreet()));
+
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
@@ -85,7 +89,6 @@ public class OrchestrationController {
                 commandeRequest.getIdAddress(), commandeRequest.getIdProduct(), commandeRequest.getQuantite());
 
         // Etape 2 : On appelle notre service d'orchestration métier
-        // créer utilisateur
         CreerCommandeResponse resultatCreationCommande = shopService.creerCommande(commandeACreer);
 
 
@@ -103,9 +106,7 @@ public class OrchestrationController {
                 commandeRequest.getIdProduct(), commandeRequest.getQuantity());
 
         // Etape 2 : On appelle notre service d'orchestration métier
-        // créer utilisateur
         CreerCommandeResponse resultatCreationCommande = shopService.ajouterProduitsCommande(addProductCommande);
-
 
         // Etape 3 : On constitue et envoie notre réponse HTTP
         return new ResponseEntity<>(resultatCreationCommande, HttpStatus.OK);
@@ -120,9 +121,7 @@ public class OrchestrationController {
                 ajouterProduitCommande.getIdProduct(), ajouterProduitCommande.getQuantity());
 
         // Etape 2 : On appelle notre service d'orchestration métier
-        // créer utilisateur
         CreerCommandeResponse resultatCreationCommande = shopService.supprimerProduitsCommande(addProductCommande);
-
 
         // Etape 3 : On constitue et envoie notre réponse HTTP
         return new ResponseEntity<>(resultatCreationCommande, HttpStatus.OK);
@@ -144,12 +143,15 @@ public class OrchestrationController {
                 commandeRequest.getCvc2()
         );
 
+        // Etape 2 : Tentative de paiement si le paiement s'execute correctement on valide alors la commande
         if(shopService.paiment(commandeAValider)){
             ValidateCommandeResponse resultatCreationCommande = shopService.validateCommande(commandeAValider);
             shopService.livrer(commandeAValider);
+            //Etape 3 : On constitue et envoie notre réponse HTTP
             return new ResponseEntity<>(resultatCreationCommande, HttpStatus.OK);
         }
 
+        //Etape 3(bis) : On constitue et envoie notre réponse HTTP
         return new ResponseEntity<>(HttpStatus.CONFLICT);
 
     }
