@@ -1,7 +1,7 @@
 Structure du projet :
 
 Projet d'orchestration : (ne comporte plus aucune logique metier et suppréssion de la gestion de la bdd)
-	-nfe107_archi_urba
+	-orchestrateur
 	
 Microservice lié au métier : (ne comporte plus aucune dépendance aux 3 autres objets métiers)
 	- customer
@@ -15,12 +15,11 @@ donné que chaque microservice embarque sa propre partie métier, qui est totale
 du reste de l'application
 
 Chaqu'un des microservice est sur un port différent afin de ne pas avoir de conflit:
-	- nfe107_archi_urba  	= 8080
+	- orchestrateur  	= 8080
 	- address  		= 8081
-	- productOrder  	= 8082
-	- customer  		= 8083
+	- commande	  	= 8083
+	- customer  		= 8082
 
 Le projet d'orchestration quant à lui s'occupera d'appeler les différentes path http mis à disposition par 
-les différents microservice afin de leurs donner sens. Actuellement rien n'est implémenté dans le projet d'orchestration.
-Cependant tout les CRUDs et services spécifiques des différents microservice sont implémentés et fonctionnels.
-
+les différents microservice afin de leurs donner sens.
+Voir document word.
